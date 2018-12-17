@@ -1,0 +1,25 @@
+---
+9993FE:
+    name: Boiler switch
+    room: 9
+5FC502:
+    name: Lounge
+    room: 5
+DBC302: 
+    name: Playroom
+    room: 3
+DCC302: 
+    name: Hallway
+    room: 1
+47C702:
+    name: Front door
+    room: 4
+CB3FFE: 
+    name: Small bedroom
+    room: 2
+67C702:
+    name: Back bedroom
+    room: 7
+24C702:
+    name: Master bedroom
+    room: 6

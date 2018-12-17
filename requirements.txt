@@ -1,0 +1,2 @@
+pyyaml
+prometheus_client
