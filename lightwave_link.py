@@ -8,6 +8,7 @@ this tool runs, and the LightwaveRF devices (which do not use WiFI).
 """
 
 import logging
+import prometheus_client
 
 logging.basicConfig(
     format="%(asctime)-15s %(levelname)-7s %(message)s ",
@@ -38,16 +39,32 @@ class LightwaveLink(object):
             Sequence of messages received from the Lightwave Link. Note that
             because the Lightwave Link broadcasts all its responses, the
             responses may not be related to any commands sent by us.
+        fLastCommandTime : float
+            Unixtime when last command was issued. Used to implement rate
+            limiting.
     """
     LIGHTWAVE_LINK_COMMAND_PORT = 9760    # Send to this address...
     LIGHTWAVE_LINK_RESPONSE_PORT = 9761   # ... and get response on this one
-    COMMAND_TIMEOUT_SECONDS = 1
+    MIN_SECONDS_BETWEEN_COMMANDS = 3.0
+    COMMAND_TIMEOUT_SECONDS = 5
+
+    sPResponseDelay = prometheus_client.Gauge(
+        "lwl_response_delay_seconds",
+        "Time between command being issued and response being recieved",
+        ["fn",],
+        )
+    sPResponseCounter = prometheus_client.Counter(
+        "lwl_responses",
+        "Number of distinct JSON message received",
+        ["fn",],
+        )
 
     def __init__(self):
         self.sSock = self.create_socket()
         self.rAddress = "255.255.255.255"
         self.siTransactionNumber = self.sequence_generator()
         self.sResponses = self.create_listener(self.sSock)
+        self.fLastCommandTime = 0
 
     def create_socket(self, rAddress=None):
         import socket
@@ -74,6 +91,17 @@ class LightwaveLink(object):
             iInt += 1
 
     def send_command(self, rPayload, iTransactionNumber=None):
+        import time
+
+        # Rate-limit
+        fNow = time.time()
+        fNext = self.fLastCommandTime + self.MIN_SECONDS_BETWEEN_COMMANDS
+        fWait = fNext - fNow
+        if fWait > 0.0:
+            sLog.log(5, "Rate limit send_command(): %s", fWait)
+            time.sleep(fWait)
+        self.fLastCommandTime = time.time()
+
         if iTransactionNumber is None:
             iTransactionNumber = self.siTransactionNumber.next()
         rCommand = "{},{}".format(
@@ -91,8 +119,13 @@ class LightwaveLink(object):
             tDestinationAddress)
 
     def get_response(self):
+        import time
         try:
             dResponse = self.sResponses.get(True, self.COMMAND_TIMEOUT_SECONDS)
+            fDelay = time.time() - self.fLastCommandTime
+            rFn = dResponse.get("fn", "")
+            self.sPResponseDelay.labels(rFn).set(fDelay)
+            self.sPResponseCounter.labels(rFn).inc()
             return dResponse
         except self.sResponses.Empty:
             return {}
@@ -103,13 +136,21 @@ class LightwaveLink(object):
         sQueue = queue.Queue()
         sQueue.Empty = queue.Empty
         def run():
+            """Responses are send twice, once unicast and another broadcast.
+            This makes duplicate messages very common."""
             import json
+            import collections
             # nonlocal sSock
             # nonlocal sQueue
             iTransactionNumber = 0
+            lPreviousMessages = collections.deque(maxlen=10)
             while True:
                 rMessage = sSock.recv(1024)
-                sLog.log(5, "RAW response: %s", rMessage)
+                if rMessage in lPreviousMessages:
+                    sLog.log(1, "Ignoring duplicate JSON message")
+                    continue
+                lPreviousMessages.appendleft(rMessage)
+                sLog.log(1, "RAW response: %s", rMessage)
                 if rMessage.startswith("*!{"):
                     rJSON = rMessage[len("*!"):]
                     dMessage = json.loads(rJSON)
@@ -118,7 +159,11 @@ class LightwaveLink(object):
                         iTransactionNumber = iResponseTrans
                         sQueue.put(dMessage)
                     else:
-                        sLog.log(5, "Discarding duplicate trans: %s", iResponseTrans)
+                        sLog.log(1, 
+                            "Discarding duplicate trans: %s", 
+                            iResponseTrans)
+                elif rMessage.strip().endswith(",OK"):
+                    sLog.log(1, "Ignoring acknowledgement")
                 else:
                     sLog.warning(
                         "Discarding non-JSON response: %s",
@@ -214,27 +259,297 @@ class LightwaveLink(object):
             sLog.warn("Aborting registration process due to SIGINT")
             return False
 
+    def scan_devices(self):
+        sLog.info("Query LightwaveLink for list of known devices ('rooms')...")
+        while True:
+            try:
+                lRooms = self.enumerate_devices()
+                break
+            except KeyError:
+                # Indicates the response was not understood
+                pass
+        sLog.info("%s devices", len(lRooms))
+        for i, iDevice in enumerate(lRooms):
+            sLog.info(
+                "Asking device #%s (room %s) to provide status update...",
+                i,
+                iDevice)
+            self.send_command("!R{}F*r".format(iDevice))
+
+    def enumerate_devices(self):
+        self.send_command("@R")
+        dResponse = self.get_response()
+        """ Sample response:
+        {u'fn': u'summary',
+         u'mac': u'20:3B:85',
+         u'pkt': u'room',
+         u'stat0': 127,     u'stat1': 1,
+         u'stat2': 0,       u'stat3': 0,
+         u'stat4': 0,       u'stat5': 0,
+         u'stat6': 0,       u'stat7': 0,
+         u'stat8': 0,       u'stat9': 0,
+         u'time': 1545144155,
+         u'trans': 1473}
+        """
+        lRooms = []
+        for i in range(10):
+            rKey = "stat{}".format(i)
+            iBits = dResponse[rKey]
+            p = 1
+            while p <= 8:
+                if not iBits:
+                    break
+                if iBits & 1:
+                    iRoom = (i*8) + p
+                    lRooms.append(iRoom)
+                p += 1
+                iBits >>= 1
+        sLog.debug("Rooms known to hub: %s", lRooms)
+        return lRooms
+
+class TRVStatus(object):
+    """
+    Sample status from 868R Thermostatic Radiator Valve (TRV)::
+
+        {u'batt': 2.69,
+         u'cTarg': 21.0,
+         u'cTemp': 22.0,
+         u'fn': u'statusPush',
+         u'mac': u'20:3B:85',
+         u'nSlot': u'18:00',
+         u'nTarg': 50.0,
+         u'output': 0,
+         u'pkt': u'868R',
+         u'prod': u'valve',
+         u'prof': 2,
+         u'serial': u'DBC302',
+         u'state': u'man',
+         u'time': 1545130654,
+         u'trans': 982,
+         u'type': u'temp',
+         u'ver': 58}
+    """
+    __slots__ = [
+        # Local data
+        u"rName",
+        # Data from Lightwave Link statusPush messages
+        u"batt", u'cTarg', u'cTemp', u'fn', u'mac', u'nSlot', u'nTarg',
+        u'output', u'pkt', u'prod', u'prof', u'serial', u'state', u'time',
+        u'trans', u'type', u'ver', ]
+
+    sPbatt = prometheus_client.Gauge(
+        "lwl_battery_volts",
+        "Battery voltage, in range 0.0-4.0 (inc.). 2.4V is considered "
+        "'low', 3.0V+ is considered full'",
+        ['serial', 'name', 'product'],
+        )
+    sPcTargC = prometheus_client.Gauge(
+        "lwl_target_celsius",
+        "0.0-40.0 current target temperature",
+        ['serial', 'name', 'product'],
+        )
+    sPcTargR = prometheus_client.Gauge(
+        "lwl_target_ratio",
+        "0.0-1.0 current target valve output",
+        ['serial', 'name', 'product'],
+        )
+    sPcTemp = prometheus_client.Gauge(
+        "lwl_current_celsius",
+        "0.0-60.0 current temperature",
+        ['serial', 'name', 'product'],
+        )
+    sPoutput = prometheus_client.Gauge(
+        "lwl_output_ratio",
+        "0.0-1.0 where 0=valve fully closed, 1=valve fully open",
+        ['serial', 'name', 'product'],
+        )
+
+    def __init__(self, rName):
+        self.rName = rName
+
+    def update(self, dStatus):
+        for rKey, mValue in dStatus.iteritems():
+            setattr(self, rKey, mValue)
+        for rKey in self.__slots__:
+            if not hasattr(self, rKey):
+                raise AttributeError(
+                    "Incoming status data missing expected key: %"
+                    % rKey)
+
+        tLabels = (self.serial, self.rName, self.prod)
+        self.sPbatt.labels(*tLabels).set(self.batt)
+        self.sPcTemp.labels(*tLabels).set(self.cTemp)
+        self.sPoutput.labels(*tLabels).set(self.output / 100.0)
+
+        # We treat target temperature and target output as different metrics
+        # because their units are different.
+        if self.cTarg < 50.0:
+            self.sPcTargC.labels(*tLabels).set(self.cTarg)
+            self.sPcTargR.labels(*tLabels).set(float("NaN"))
+        else:
+            fRatio = (self.cTarg - 50) / (60-50)
+            self.sPcTargC.labels(*tLabels).set(float("NaN"))
+            self.sPcTargR.labels(*tLabels).set(fRatio)
+
+
+    def get_battery_level_str(self):
+        fBatt = self.batt
+
+        fLo = 2.4
+        fHi = 3.0
+
+        # Get battery percentage
+        # Note that we want fLo to be ~10%, not 0%!
+        fLo10 = fLo - ((fHi - fLo)/10)
+        rBatt = "{:.0%}".format((fBatt - fLo10) / (fHi-fLo10))
+
+        return rBatt
+
+    @staticmethod
+    def format_temperature(fTemp):
+        rTemp = ""
+        if 0.0 <= fTemp < 50.0:
+            return "{:.1f}°C".format(fTemp)
+        else:
+            # 50.0 = Valve closed
+            # 60.0 = Valve open
+            fValve = (fTemp - 50) / (60-50)
+            return "{:.0%}".format(fValve)
+
+    @staticmethod
+    def format_prof(iProf):
+        return {
+             1: "Monday",
+             2: "Tuesday",
+             3: "Wednesday",
+             4: "Thursday",
+             5: "Friday",
+             6: "Saturday",
+             7: "Sunday",
+             }.get(iProf, "(?)")
+
+    def __str__(self):
+        import textwrap
+        rBatt = self.get_battery_level_str()
+        rcTarg = self.format_temperature(self.cTarg)
+        rnTarg = self.format_temperature(self.nTarg)
+        rProf = self.format_prof(self.prof)
+
+        dLocals = locals()
+
+        return textwrap.dedent("""\
+                TRVStatus({self.rName}):
+                     batt: {rBatt:<10}  {self.batt}V (2.4-3.0V)
+                    cTarg: {rcTarg:<10}   {self.cTarg}
+                    cTemp: {self.cTemp}°C
+                    nSlot: {self.nSlot}
+                    nTarg: {rnTarg:<10}   {self.nTarg}
+                   output: {self.output}%
+                     prof: {rProf:<10}  {self.prof}
+                   serial: {self.serial}
+                    state: {self.state}
+                     time: {self.time}
+                    trans: {self.trans}
+                """.format(
+                    **locals()
+                    ))
+
+def load_config():
+    import yaml
+    with file("config.yml", "r") as sFH:
+        dConfig = yaml.load(sFH)
+    return dConfig
+
+def call_for_heat(dConfig, sLink, dStatus):
+    yCallForHeat = is_calling_for_heat(dStatus)
+    sLog.info("Call for heat: %s", yCallForHeat)
+
+    for rSerial, dDevice in dConfig.iteritems():
+        if dDevice["name"] == "Boiler switch":
+            break
+    else:
+        sLog.error("No device named 'Boiler switch' present in configuration "
+            "file, unable to call for (lack of) heat!")
+        return
+
+    rCommandTemplate = "!R{}F*tP{}"
+    OFF = 50.0
+    ON = 60.0
+    if yCallForHeat:
+        rCommand = rCommandTemplate.format(dDevice["room"], ON)
+    else:
+        rCommand = rCommandTemplate.format(dDevice["room"], OFF)
+
+    if rSerial in dStatus:
+        sDevice = dStatus[rSerial]
+        if bool(sDevice.output) == yCallForHeat:
+            sLog.info("Call for heat: NOOP (output: %s)", sDevice.output)
+            return
+
+    sLog.info("Call for heat: %s (command: %s)", yCallForHeat, rCommand)
+    sLink.send_command(rCommand)
+
+def is_calling_for_heat(dStatus):
+    lOutputs = []
+    for sStatus in dStatus.itervalues():
+        if sStatus.prod != "valve":
+            continue
+        lOutputs.append(sStatus.output)
+
+    if max(lOutputs) == 0:
+        # All thermostatic radiator valves are fully closed, no need for heat
+        return False
+    else:
+        return True
+
 def main():
     import time
     import json
     import pprint
 
-    import prometheus_client
-    sCounter = prometheus_client.Counter(
-        "lwl_response_count",
-        "Number of distinct JSON message recieved from the Lightwave Link",
-        )
+    dConfig = load_config()
+
     prometheus_client.start_http_server(9191)
 
     sLink = LightwaveLink()
     sLink.test_connectivity()
+    sLink.scan_devices()
 
-    # Do nothing using an interruptible system call, so signals can be
-    # delivered.
+    dStatus = {}
+
     while True:
-        dResponse = sLink.sResponses.get(True, 3600)
-        pprint.pprint(dResponse)
-        sCounter.inc()
+        try:
+            # Avoid entering an unblockable system call, as that would prevent
+            # signals like SIGINT (KeyboardInterrupt) being delivered
+            dResponse = sLink.sResponses.get(True, 3600)
+        except sLink.sResponses.Empty:
+            continue
+
+        if dResponse.get("fn") in ("statusPush", "statusOn", "statusOff"):
+            rSerial = dResponse["serial"]
+            if rSerial not in dStatus:
+                if rSerial not in dConfig:
+                    sLog.warn(
+                        "Device with serial %s not present in config file",
+                        rSerial)
+                rName = dConfig.get(rSerial, {"name":rSerial})["name"]
+                dStatus[rSerial] = TRVStatus(rName)
+            dStatus[rSerial].update(dResponse)
+            print dStatus[rSerial]
+            call_for_heat(dConfig, sLink, dStatus)
+        elif dResponse.get("fn") in (
+                "ack",
+                "getStatus",
+                "home",
+                "hubCall",
+                "setTarget",
+                "setTime",
+            ):
+            pass
+        elif dResponse.get("type") == "log":
+            pass
+        else:
+            sLog.warn("Unhandled response:\n%s", dResponse)
 
 if __name__ == "__main__":
     main()
