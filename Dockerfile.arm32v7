@@ -1,0 +1,17 @@
+# Intended for use on a Raspberry Pi 3 (model B)
+FROM arm32v7/debian:8
+
+RUN apt-get update \
+ && apt-get install -y \
+    python \
+    python-pip \
+ && rm -rf /var/lib/apt/lists/*
+
+COPY ./requirements.txt /app/
+RUN pip install -r /app/requirements.txt
+
+CMD python /app/lightwave_link.py
+WORKDIR /app/
+
+# Do this last, as script is still in development and changes often
+COPY ./lightwave_link.py ./config.yml /app/
