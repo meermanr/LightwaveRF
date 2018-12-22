@@ -1,4 +1,5 @@
 #!/usr/bin/python2.7
+# encoding: utf8
 """
 Monitoring tool for LightwaveRF Heating, based on the API published at
 https://api.lightwaverf.com/introduction_basic_comms.html
