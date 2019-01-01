@@ -69,7 +69,7 @@ class LightwaveLink(object):
         self.sResponses = self.create_listener(self.sSock)
         self.fLastCommandTime = 0
 
-    def create_socket(self, rAddress=None):
+    def create_socket(self):
         import socket
         sSock = socket.socket(
             socket.AF_INET, 
@@ -180,7 +180,6 @@ class LightwaveLink(object):
         return sQueue
 
     def test_connectivity(self):
-        import time
         sLog.info("Checking if this host is registered with Lightwave Link...")
         self.send_command("@H") # Hub call
         dResponse = self.get_response()
@@ -426,7 +425,6 @@ class TRVStatus(object):
 
     @staticmethod
     def format_temperature(fTemp):
-        rTemp = ""
         if 0.0 <= fTemp < 50.0:
             return "{:.1f}°C".format(fTemp)
         else:
@@ -493,7 +491,7 @@ def load_config():
 def call_for_heat(sLink, dStatus):
     lCalling = are_calling_for_heat(dStatus)
 
-    for rSerial, sDevice in dStatus.iteritems():
+    for sDevice in dStatus.itervalues():
         if sDevice.rName == "Boiler switch":
             break
     else:
@@ -528,10 +526,6 @@ def are_calling_for_heat(dStatus):
     return lCalling
 
 def main():
-    import time
-    import json
-    import pprint
-
     dConfig = load_config()
 
     prometheus_client.start_http_server(9191)
