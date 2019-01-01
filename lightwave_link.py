@@ -263,7 +263,7 @@ class LightwaveLink(object):
             return False
 
     def scan_devices(self):
-        sLog.info("Query LightwaveLink for list of known devices ('rooms')...")
+        sLog.info("Query LightwaveLink for list of known devices...")
         while True:
             try:
                 lRooms = self.enumerate_devices()
@@ -273,10 +273,7 @@ class LightwaveLink(object):
                 pass
         sLog.info("%s devices", len(lRooms))
         for i, iDevice in enumerate(lRooms):
-            sLog.info(
-                "Asking device #%s (room %s) to provide status update...",
-                i,
-                iDevice)
+            sLog.info("Asking device #%s to provide status update...", i)
             # Get device info (serial + room in same JSON response!)
             self.send_command("@?R{}".format(iDevice))
             # Request status report from device
@@ -491,12 +488,11 @@ def load_config():
         dConfig = yaml.load(sFH)
     return dConfig
 
-def call_for_heat(dConfig, sLink, dStatus):
-    yCallForHeat = is_calling_for_heat(dStatus)
-    sLog.info("Call for heat: %s", yCallForHeat)
+def call_for_heat(sLink, dStatus):
+    lCalling = are_calling_for_heat(dStatus)
 
-    for rSerial, dDevice in dConfig.iteritems():
-        if dDevice["name"] == "Boiler switch":
+    for rSerial, sDevice in dStatus.iteritems():
+        if sDevice.rName == "Boiler switch":
             break
     else:
         sLog.error("No device named 'Boiler switch' present in configuration "
@@ -506,32 +502,28 @@ def call_for_heat(dConfig, sLink, dStatus):
     rCommandTemplate = "!R{}F*tP{}"
     OFF = 50.0
     ON = 60.0
-    if yCallForHeat:
-        rCommand = rCommandTemplate.format(dDevice["room"], ON)
+    if lCalling:
+        rCommand = rCommandTemplate.format(sDevice.slot, ON)
     else:
-        rCommand = rCommandTemplate.format(dDevice["room"], OFF)
+        rCommand = rCommandTemplate.format(sDevice.slot, OFF)
 
-    if rSerial in dStatus:
-        sDevice = dStatus[rSerial]
-        if bool(sDevice.output) == yCallForHeat:
-            sLog.info("Call for heat: NOOP (output: %s)", sDevice.output)
-            return
+    if bool(sDevice.output) == bool(lCalling):
+        sLog.info("Call for heat: NOOP (heating: %s)", bool(sDevice.output))
+        return
 
-    sLog.info("Call for heat: %s (command: %s)", yCallForHeat, rCommand)
+    lNames = [ x.rName for x in lCalling ]
+    sLog.info("Call for heat: %s (command: %s)", lNames, rCommand)
     sLink.send_command(rCommand)
 
-def is_calling_for_heat(dStatus):
-    lOutputs = []
-    for sStatus in dStatus.itervalues():
-        if sStatus.prod != "valve":
+def are_calling_for_heat(dStatus):
+    lCalling = []
+    for sDevice in dStatus.itervalues():
+        if sDevice.prod != "valve":
             continue
-        lOutputs.append(sStatus.output)
+        if sDevice.output:
+            lCalling.append(sDevice)
 
-    if max(lOutputs) == 0:
-        # All thermostatic radiator valves are fully closed, no need for heat
-        return False
-    else:
-        return True
+    return lCalling
 
 def main():
     import time
@@ -565,7 +557,7 @@ def main():
                     sLog.warn(
                         "Device with serial %s not present in config file",
                         rSerial)
-                rName = dConfig.get(rSerial, {"name":rSerial})["name"]
+                rName = dConfig.get(rSerial, rSerial)
                 dStatus[rSerial] = TRVStatus(rName)
             dStatus[rSerial].update(dResponse)
             sLog.info(str(dStatus[rSerial]))
@@ -574,7 +566,7 @@ def main():
 
             # Try to avoid hysteria following sLink.scan_devices()
             if sLink.sResponses.empty():
-                call_for_heat(dConfig, sLink, dStatus)
+                call_for_heat(sLink, dStatus)
         elif dResponse.get("fn") in (
                 "ack",
                 "getStatus",
