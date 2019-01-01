@@ -56,53 +56,6 @@ lightwaverf_1  | 2019-01-01 11:06:20,059 INFO    This device is registered.
 
 ### Edit `config.yml`
 
-Edit the serial and room number of the entry named "Boiler switch" to match the device that controls your boiler.
+Edit the serial number of the entry named "Boiler switch" to match the device that controls your boiler, and add/remove other entries as desired.
 
 The serial is easiest to find from the [LightwaveRF Manager web-app](https://manager.lightwaverf.com/heating-device-list), assuming you have been using one of LightwaveRF's apps (etc.) to manage your heating. You can login using the same credentials used with their mobile app.  The device listing will show its serial when you tap on it, e.g. 9993FE.
-
-The room number is much harder to find...
-
-At launch, we query the Lightwave Link's so-called "slots" where linked energy and heating devices  are stored. The slot number is called "room" in commands and status reports. 
-
-Every device reported by the Lightwave Link is sent a command to report its current status:
-
-```
-lightwaverf_1  | 2019-01-01 11:06:20,059 INFO    Query LightwaveLink for list of known devices ('rooms')...
-lightwaverf_1  | 2019-01-01 11:06:24,046 INFO    8 devices
-lightwaverf_1  | 2019-01-01 11:06:24,048 INFO    Asking device #0 (room 1) to provide status update...
-lightwaverf_1  | 2019-01-01 11:06:26,032 INFO    Asking device #1 (room 2) to provide status update...
-lightwaverf_1  | 2019-01-01 11:06:29,032 INFO    Asking device #2 (room 3) to provide status update...
-lightwaverf_1  | 2019-01-01 11:06:32,034 INFO    Asking device #3 (room 4) to provide status update...
-lightwaverf_1  | 2019-01-01 11:06:35,035 INFO    Asking device #4 (room 5) to provide status update...
-lightwaverf_1  | 2019-01-01 11:06:38,038 INFO    Asking device #5 (room 6) to provide status update...
-lightwaverf_1  | 2019-01-01 11:06:38,154 WARNING Discarding non-JSON response: 46340786,ERR,6,"Transmit fail"
-lightwaverf_1  |
-lightwaverf_1  | 2019-01-01 11:06:41,038 INFO    Asking device #6 (room 7) to provide status update...
-lightwaverf_1  | 2019-01-01 11:06:44,039 INFO    Asking device #7 (room 9) to provide status update...
-```
-
-Notes:
-
-- Room numbers are not sequential! Device 7 is in room 9!
-- No action is taken in response to the "Transmit fail" error
-
-The responses are then shown in the order recieved. Annoyingly, the response data does not include the device's room number, so you'll have to associate it with a room number request (above) yourself...
-
-```
-lightwaverf_1  | 2019-01-01 11:06:47,053 INFO    TRVStatus(Front door):
-lightwaverf_1  |      batt: 64%         2.76V (2.4-3.0V)
-lightwaverf_1  |     cTarg: 17.0°C      17.0
-lightwaverf_1  |     cTemp: 16.5°C
-lightwaverf_1  |     nSlot: 18:00
-lightwaverf_1  |     nTarg: 0%           50.0
-lightwaverf_1  |    output: 10%
-lightwaverf_1  |      prof: Tuesday     2
-lightwaverf_1  |    serial: 47C702
-lightwaverf_1  |     state: man
-lightwaverf_1  |      time: 1546340799
-lightwaverf_1  |     trans: 41
-```
-
-(Note that the name in the top line ("Front door") is read from `config.yml`.
-
-
