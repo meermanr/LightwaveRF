@@ -343,16 +343,6 @@ class TRVStatus(object):
         "prod":"valve"}
 
     """
-    __slots__ = [
-        # Local data
-        u"rName",
-        # Data from Lightwave Link statusPush messages
-        u"batt", u'cTarg', u'cTemp', u'fn', u'mac', u'nSlot', u'nTarg',
-        u'output', u'pkt', u'prod', u'prof', u'serial', u'state', u'time',
-        u'trans', u'type', u'ver',
-        # Data unique to room messages (query device info from hub)
-        u'slot',
-        ]
 
     sPbatt = prometheus_client.Gauge(
         "lwl_battery_volts",
@@ -382,9 +372,30 @@ class TRVStatus(object):
         )
 
     def __init__(self, rName):
-        for rKey in self.__slots__:
-            setattr(self, rKey, None)
+        # Local data
         self.rName = rName
+
+        # Data from Lightwave Link statusPush messages
+        self.batt = None
+        self.cTarg = None
+        self.cTemp = None
+        self.fn = None
+        self.mac = None
+        self.nSlot = None
+        self.nTarg = None
+        self.output = None
+        self.pkt = None
+        self.prod = None
+        self.prof = None
+        self.serial = None
+        self.state = None
+        self.time = None
+        self.trans = None
+        self.type = None
+        self.ver = None
+
+        # Data unique to room messages (query device info from hub)
+        self.slot = None
 
     def update(self, dStatus):
         for rKey, mValue in dStatus.iteritems():
