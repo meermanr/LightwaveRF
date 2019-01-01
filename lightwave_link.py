@@ -277,6 +277,9 @@ class LightwaveLink(object):
                 "Asking device #%s (room %s) to provide status update...",
                 i,
                 iDevice)
+            # Get device info (serial + room in same JSON response!)
+            self.send_command("@?R{}".format(iDevice))
+            # Request status report from device
             self.send_command("!R{}F*r".format(iDevice))
 
     def enumerate_devices(self):
@@ -331,6 +334,18 @@ class TRVStatus(object):
          u'trans': 982,
          u'type': u'temp',
          u'ver': 58}
+
+    Sample description of device from Lightwave Link ("hub")::
+
+       {"trans":357,
+        "mac":"20:3B:85",
+        "time":1546366407,
+        "pkt":"room",
+        "fn":"read",
+        "slot":1,
+        "serial":"DCC302",
+        "prod":"valve"}
+
     """
     __slots__ = [
         # Local data
@@ -338,7 +353,10 @@ class TRVStatus(object):
         # Data from Lightwave Link statusPush messages
         u"batt", u'cTarg', u'cTemp', u'fn', u'mac', u'nSlot', u'nTarg',
         u'output', u'pkt', u'prod', u'prof', u'serial', u'state', u'time',
-        u'trans', u'type', u'ver', ]
+        u'trans', u'type', u'ver',
+        # Data unique to room messages (query device info from hub)
+        u'slot',
+        ]
 
     sPbatt = prometheus_client.Gauge(
         "lwl_battery_volts",
@@ -373,11 +391,10 @@ class TRVStatus(object):
     def update(self, dStatus):
         for rKey, mValue in dStatus.iteritems():
             setattr(self, rKey, mValue)
-        for rKey in self.__slots__:
-            if not hasattr(self, rKey):
-                raise AttributeError(
-                    "Incoming status data missing expected key: %"
-                    % rKey)
+
+        if dStatus["fn"] == "read":
+            # Do not update prometheus metrics - not a status update
+            return
 
         tLabels = (self.serial, self.rName, self.prod)
         self.sPbatt.labels(*tLabels).set(self.batt)
@@ -433,6 +450,13 @@ class TRVStatus(object):
 
     def __str__(self):
         import textwrap
+        from collections import defaultdict
+
+        # Data only available if we've recieved a status update, otherwise may
+        # raise AttributeError.
+        if not hasattr(self, "batt"):
+            return self.__repr__()
+
         rBatt = self.get_battery_level_str()
         rcTarg = self.format_temperature(self.cTarg)
         rnTarg = self.format_temperature(self.nTarg)
@@ -449,12 +473,16 @@ class TRVStatus(object):
                     nTarg: {rnTarg:<10}   {self.nTarg}
                    output: {self.output}%
                      prof: {rProf:<10}  {self.prof}
+                     prod: {self.prod}
                    serial: {self.serial}
+                     slot: {self.slot}
                     state: {self.state}
                      time: {self.time}
                     trans: {self.trans}
+                     type: {self.type}
+                      ver: {self.ver}
                 """.format(
-                    **locals()
+                    **dLocals
                     ))
 
 def load_config():
@@ -530,7 +558,7 @@ def main():
             # TODO: Alerting about any devices that are not responding
             continue
 
-        if dResponse.get("fn") in ("statusPush", "statusOn", "statusOff"):
+        if dResponse.get("fn") in ("read", "statusPush", "statusOn", "statusOff"):
             rSerial = dResponse["serial"]
             if rSerial not in dStatus:
                 if rSerial not in dConfig:
