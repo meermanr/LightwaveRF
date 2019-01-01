@@ -1,0 +1,19 @@
+version: "2"
+volumes:
+    prometheus-volume:
+services:
+    lightwaverf:
+        build:
+            context: .
+            dockerfile: Dockerfile.arm32v7
+        # Listens for UDP broadcast traffic on port 9761 (LightwaveRF responses)
+        # Listens for HTTP (TCP) traffic on 9191 (prometheus exporter)
+        network_mode: host
+    prometheus:
+        build:
+            context: prometheus/
+            dockerfile: Dockerfile.arm32v7
+        # Listens for HTTP (TCP) traffic on 9090 (prometheus UI)
+        network_mode: host
+        volumes:
+            - prometheus-volume:/app/data/

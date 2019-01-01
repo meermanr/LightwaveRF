@@ -1,0 +1,18 @@
+[Unit]
+Description=LightWaveRF service with docker compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+
+WorkingDirectory=/home/pi/LightwaveRF/
+
+# Compose up (create everything needed, inc. volumes and networks, etc)
+ExecStart=/usr/bin/docker-compose up
+
+# Compose stop, remove containers (but not volumes, networks, etc)
+ExecStop=/usr/bin/docker-compose stop -v
+
+[Install]
+WantedBy=multi-user.target
