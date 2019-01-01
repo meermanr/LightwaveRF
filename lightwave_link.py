@@ -8,10 +8,12 @@ This tool requires a LightwaveRF Link to bridge the UDP/IP network on which
 this tool runs, and the LightwaveRF devices (which do not use WiFI).
 """
 
+import sys
 import logging
 import prometheus_client
 
 logging.basicConfig(
+    stream=sys.stdout,
     format="%(asctime)-15s %(levelname)-7s %(message)s ",
     level=logging.INFO)
 sLog = logging.getLogger('LightwaveLink')
