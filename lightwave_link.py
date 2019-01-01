@@ -153,7 +153,7 @@ class LightwaveLink(object):
                     sLog.log(1, "Ignoring duplicate JSON message")
                     continue
                 lPreviousMessages.appendleft(rMessage)
-                sLog.log(1, "RAW response: %s", rMessage)
+                sLog.log(2, "RAW response: %s", rMessage)
                 if rMessage.startswith("*!{"):
                     rJSON = rMessage[len("*!"):]
                     dMessage = json.loads(rJSON)
