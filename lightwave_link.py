@@ -538,8 +538,11 @@ def main():
                 rName = dConfig.get(rSerial, {"name":rSerial})["name"]
                 dStatus[rSerial] = TRVStatus(rName)
             dStatus[rSerial].update(dResponse)
-            print dStatus[rSerial]
-            call_for_heat(dConfig, sLink, dStatus)
+            sLog.info(str(dStatus[rSerial]))
+
+            # Try to avoid hysteria following sLink.scan_devices()
+            if sLink.sResponses.empty():
+                call_for_heat(dConfig, sLink, dStatus)
         elif dResponse.get("fn") in (
                 "ack",
                 "getStatus",
