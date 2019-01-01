@@ -383,6 +383,8 @@ class TRVStatus(object):
         )
 
     def __init__(self, rName):
+        for rKey in self.__slots__:
+            setattr(self, rKey, None)
         self.rName = rName
 
     def update(self, dStatus):
