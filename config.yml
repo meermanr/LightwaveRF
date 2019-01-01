@@ -1,4 +1,24 @@
 ---
+# Purpose:
+#
+#   1. Designate which device controls the boiler - must have name "Boiler
+#      switch"
+#   2. Give names to radiators ("rooms") which appear in logs and, importantly,
+#      prometheus time-series data 
+#
+# Format:
+#
+#   $SERIAL_STR:
+#     name: $NAME_STR
+#     room: $ROOM_INT
+#
+# The serial of each device is included in every report they produce (and thus
+# appears in the log).
+#
+# The room number is not in the reports, but is needed to send commands;
+# presumably the Lightwave Link does some translation before emitting RF
+# traffic.
+#
 9993FE:
     name: Boiler switch
     room: 9
