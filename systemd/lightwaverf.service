@@ -9,7 +9,7 @@ Restart=always
 WorkingDirectory=/home/pi/LightwaveRF/
 
 # Compose up (create everything needed, inc. volumes and networks, etc)
-ExecStart=/usr/bin/docker-compose up
+ExecStart=/usr/bin/docker-compose up --build
 
 # Compose stop, remove containers (but not volumes, networks, etc)
 ExecStop=/usr/bin/docker-compose stop -v
