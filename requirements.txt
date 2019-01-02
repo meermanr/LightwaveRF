@@ -1,2 +1,3 @@
-pyyaml
 prometheus_client
+pylint==1.9
+pyyaml
