@@ -467,10 +467,19 @@ class TRVStatus(object):
     def __str__(self):
         import textwrap
 
-        # Data only available if we've recieved a status update, otherwise may
+        # Data only available if we've received a status update, otherwise may
         # raise AttributeError.
-        if not hasattr(self, "batt"):
-            return self.__repr__()
+        if not self.batt:
+            return textwrap.dedent("""\
+                TRVStatus({self.rName}):
+                     prod: {self.prod}
+                   serial: {self.serial}
+                     slot: {self.slot}
+                     time: {self.time}
+                    trans: {self.trans}
+                """.format(
+                    self=self,
+                    ))
 
         # pylint: disable=unused-variable
         rBatt = self.get_battery_level_str()
@@ -481,25 +490,25 @@ class TRVStatus(object):
         dLocals = locals()
 
         return textwrap.dedent("""\
-                TRVStatus({self.rName}):
-                     batt: {rBatt:<10}  {self.batt}V (2.4-3.0V)
-                    cTarg: {rcTarg:<10}   {self.cTarg}
-                    cTemp: {self.cTemp}°C
-                    nSlot: {self.nSlot}
-                    nTarg: {rnTarg:<10}   {self.nTarg}
-                   output: {self.output}%
-                     prof: {rProf:<10}  {self.prof}
-                     prod: {self.prod}
-                   serial: {self.serial}
-                     slot: {self.slot}
-                    state: {self.state}
-                     time: {self.time}
-                    trans: {self.trans}
-                     type: {self.type}
-                      ver: {self.ver}
-                """.format(
-                    **dLocals
-                    ))
+            TRVStatus({self.rName}):
+                 batt: {rBatt:<10}  {self.batt}V (2.4-3.0V)
+                cTarg: {rcTarg:<10}   {self.cTarg}
+                cTemp: {self.cTemp}°C
+                nSlot: {self.nSlot}
+                nTarg: {rnTarg:<10}   {self.nTarg}
+               output: {self.output}%
+                 prof: {rProf:<10}  {self.prof}
+                 prod: {self.prod}
+               serial: {self.serial}
+                 slot: {self.slot}
+                state: {self.state}
+                 time: {self.time}
+                trans: {self.trans}
+                 type: {self.type}
+                  ver: {self.ver}
+            """.format(
+                **dLocals
+                ))
 
 def load_config():
     import yaml
