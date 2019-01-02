@@ -8,6 +8,8 @@ This tool requires a LightwaveRF Link to bridge the UDP/IP network on which
 this tool runs, and the LightwaveRF devices (which do not use WiFI).
 """
 
+# pylint: disable=invalid-name,trailing-whitespace,missing-docstring
+
 import sys
 import logging
 import prometheus_client
@@ -68,8 +70,11 @@ class LightwaveLink(object):
         self.siTransactionNumber = self.sequence_generator()
         self.sResponses = self.create_listener(self.sSock)
         self.fLastCommandTime = 0
+        self.sThead = None
 
     def create_socket(self):
+        """Create a listening socket to receive UDP messages from the Lightwave
+        Link"""
         import socket
         sSock = socket.socket(
             socket.AF_INET, 
@@ -162,7 +167,8 @@ class LightwaveLink(object):
                         iTransactionNumber = iResponseTrans
                         sQueue.put(dMessage)
                     else:
-                        sLog.log(1, 
+                        sLog.log(
+                            1, 
                             "Discarding duplicate trans: %s", 
                             iResponseTrans)
                 elif rMessage.strip().endswith(",OK"):
@@ -171,12 +177,12 @@ class LightwaveLink(object):
                     sLog.warning(
                         "Discarding non-JSON response: %s",
                         rMessage)
-        sThread = threading.Thread(
+        self.sThread = threading.Thread(
             target=run,
             name="LightwaveLink Listener"
             )
-        sThread.daemon = True   # Do not prevent process exit()
-        sThread.start()
+        self.sThread.daemon = True   # Do not prevent process exit()
+        self.sThread.start()
         return sQueue
 
     def test_connectivity(self):
@@ -209,9 +215,9 @@ class LightwaveLink(object):
             return True
         elif dResponse.get("fn") == "nonRegistered":
             return self.register()
-        else:
-            sLog.debug("Unexpected response: %s", dResponse)
-            return False
+
+        sLog.debug("Unexpected response: %s", dResponse)
+        return False
 
     def register(self):
         """
@@ -250,7 +256,8 @@ class LightwaveLink(object):
                 self.send_command("!F*p")
                 dResponse = self.get_response()
                 if dResponse.get("fn") == "nonRegistered":
-                    sLog.info("Pairing request sent. Please push button with "
+                    sLog.info(
+                        "Pairing request sent. Please push button with "
                         "flashing light on Lightwave Link to complete "
                         "pairing. (Or press ^C to give up)")
                     time.sleep(3)
@@ -343,6 +350,7 @@ class TRVStatus(object):
         "prod":"valve"}
 
     """
+    # pylint: disable=too-many-instance-attributes
 
     sPbatt = prometheus_client.Gauge(
         "lwl_battery_volts",
@@ -438,33 +446,33 @@ class TRVStatus(object):
     def format_temperature(fTemp):
         if 0.0 <= fTemp < 50.0:
             return "{:.1f}°C".format(fTemp)
-        else:
-            # 50.0 = Valve closed
-            # 60.0 = Valve open
-            fValve = (fTemp - 50) / (60-50)
-            return "{:.0%}".format(fValve)
+
+        # 50.0 = Valve closed
+        # 60.0 = Valve open
+        fValve = (fTemp - 50) / (60-50)
+        return "{:.0%}".format(fValve)
 
     @staticmethod
     def format_prof(iProf):
         return {
-             1: "Monday",
-             2: "Tuesday",
-             3: "Wednesday",
-             4: "Thursday",
-             5: "Friday",
-             6: "Saturday",
-             7: "Sunday",
-             }.get(iProf, "(?)")
+            1: "Monday",
+            2: "Tuesday",
+            3: "Wednesday",
+            4: "Thursday",
+            5: "Friday",
+            6: "Saturday",
+            7: "Sunday",
+            }.get(iProf, "(?)")
 
     def __str__(self):
         import textwrap
-        from collections import defaultdict
 
         # Data only available if we've recieved a status update, otherwise may
         # raise AttributeError.
         if not hasattr(self, "batt"):
             return self.__repr__()
 
+        # pylint: disable=unused-variable
         rBatt = self.get_battery_level_str()
         rcTarg = self.format_temperature(self.cTarg)
         rnTarg = self.format_temperature(self.nTarg)
@@ -506,9 +514,12 @@ def call_for_heat(sLink, dStatus):
         if sDevice.rName == "Boiler switch":
             break
     else:
-        sLog.error("No device named 'Boiler switch' present in configuration "
+        sLog.error(
+            "No device named 'Boiler switch' present in configuration "
             "file, unable to call for (lack of) heat!")
         return
+
+    # pylint: disable=undefined-loop-variable
 
     rCommandTemplate = "!R{}F*tP{}"
     OFF = 50.0
@@ -522,7 +533,7 @@ def call_for_heat(sLink, dStatus):
         sLog.info("Call for heat: NOOP (heating: %s)", bool(sDevice.output))
         return
 
-    lNames = [ x.rName for x in lCalling ]
+    lNames = [x.rName for x in lCalling]
     sLog.info("Call for heat: %s (command: %s)", lNames, rCommand)
     sLink.send_command(rCommand)
 
