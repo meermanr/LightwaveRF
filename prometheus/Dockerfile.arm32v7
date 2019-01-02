@@ -15,6 +15,6 @@ RUN cd /tmp \
 EXPOSE 9090
 WORKDIR /app/
 VOLUME /app/data/
-CMD /app/prometheus
+CMD /app/prometheus --storage.tsdb.retention=10y
 
 COPY ./prometheus.yml /app/
