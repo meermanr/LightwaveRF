@@ -9,10 +9,10 @@ Restart=always
 WorkingDirectory=/home/pi/LightwaveRF/
 
 # Compose up (create everything needed, inc. volumes and networks, etc)
-ExecStart=/usr/bin/docker-compose up --build
+ExecStart=/usr/bin/env docker-compose up --build
 
 # Compose stop, remove containers (but not volumes, networks, etc)
-ExecStop=/usr/bin/docker-compose stop -v
+ExecStop=/usr/bin/env docker-compose stop -v
 
 [Install]
 WantedBy=multi-user.target
