@@ -20,6 +20,8 @@ services:
             - prometheus-volume:/app/data/
     grafana:
         image: grafana/grafana-arm32v7-linux:5.4.3
+        depends_on:
+            - prometheus
         # Listens for HTTP (TCP) traffic on 3000 (Grafana UI)
         network_mode: host
         environment:
