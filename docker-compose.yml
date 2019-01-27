@@ -1,6 +1,7 @@
 version: "2"
 volumes:
     prometheus-volume:
+    grafana-volume:
 services:
     lightwaverf:
         build:
@@ -17,3 +18,14 @@ services:
         network_mode: host
         volumes:
             - prometheus-volume:/app/data/
+    grafana:
+        image: grafana/grafana-arm32v7-linux:5.4.3
+        # Listens for HTTP (TCP) traffic on 3000 (Grafana UI)
+        network_mode: host
+        environment:
+            - GF_SECURITY_ADMIN_PASSWORD=lightwave
+            - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
+            - GF_AUTH_ANONYMOUS_ENABLED=true
+        volumes:
+            - ./grafana/provisioning/:/etc/grafana/provisioning/:ro
+            - grafana-volume:/var/lib/grafana
