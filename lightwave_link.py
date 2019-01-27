@@ -177,8 +177,20 @@ class LightwaveLink(object):
                     sLog.warning(
                         "Discarding non-JSON response: %s",
                         rMessage)
+        def runner():
+            # nonlocal run
+            # nonlocal sLog
+            while True:
+                # pylint: disable=bare-except
+                try:
+                    run()
+                except:
+                    sLog.error(
+                        "Exception from Lightwave Listener thread",
+                        exc_info=True)
+
         self.sThread = threading.Thread(
-            target=run,
+            target=runner,
             name="LightwaveLink Listener"
             )
         self.sThread.daemon = True   # Do not prevent process exit()
