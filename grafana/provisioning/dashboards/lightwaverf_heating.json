@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1548624805012,
+  "iteration": 1548879769493,
   "links": [],
   "panels": [
     {
@@ -278,7 +278,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -371,7 +371,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -464,7 +464,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -557,7 +557,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -650,7 +650,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -743,7 +743,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -936,7 +936,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1037,7 +1037,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1138,7 +1138,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1239,7 +1239,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1340,7 +1340,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1441,7 +1441,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1632,7 +1632,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -1725,7 +1725,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -1818,7 +1818,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -1911,7 +1911,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2004,7 +2004,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2097,7 +2097,7 @@
       ],
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2327,7 +2327,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -2469,7 +2469,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -2611,7 +2611,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -2753,7 +2753,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -2895,7 +2895,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3037,7 +3037,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "h",
-      "repeatIteration": 1548624805012,
+      "repeatIteration": 1548879769493,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3206,7 +3206,7 @@
             "handler": 1,
             "message": "One or more electric switches failed to answer a \"call-for-heat\" from one or more thermostatic radiator valves. When any valve has a non-zero output, at least one electric switch is expected to be ON (i.e. the central boiler)",
             "name": "Call for heat: Switching on alert",
-            "noDataState": "no_data",
+            "noDataState": "ok",
             "notifications": []
           },
           "aliasColors": {},
@@ -3369,7 +3369,7 @@
             "handler": 1,
             "message": "One or more electric switches failed to become OFF after all thermostatic radiator valves set their output to 0%.",
             "name": "Call for heat: Switching off alert",
-            "noDataState": "no_data",
+            "noDataState": "ok",
             "notifications": []
           },
           "aliasColors": {},
@@ -3627,7 +3627,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -3653,7 +3652,6 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
           "text": "All",
           "value": "$__all"
         },
@@ -3710,5 +3708,5 @@
   "timezone": "",
   "title": "LightwaveRF Heating",
   "uid": "LJ_reSigk",
-  "version": 5
+  "version": 6
 }
