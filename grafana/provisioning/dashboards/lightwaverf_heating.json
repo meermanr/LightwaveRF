@@ -14,7 +14,7 @@
   },
   "editable": true,
   "gnetId": null,
-  "graphTooltip": 0,
+  "graphTooltip": 1,
   "iteration": 1548879769493,
   "links": [],
   "panels": [
@@ -3708,5 +3708,5 @@
   "timezone": "",
   "title": "LightwaveRF Heating",
   "uid": "LJ_reSigk",
-  "version": 6
+  "version": 7
 }
