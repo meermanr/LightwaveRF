@@ -574,6 +574,35 @@ def are_calling_for_heat(dStatus):
 
     return lCalling
 
+def scan_stale_devices(dStatus, sLink):
+    # Generator which _may_ scan stale devices, if it hasn't done so recently
+    import time
+
+    STALE_THRESHOLD_SECONDS   = 3*60*60  # 3h
+    MIN_SCAN_INTERVAL_SECONDS =   30*60  # 30m
+
+    iNextScanTime = 0
+
+    while True:
+        iNow = time.time()
+        if iNow < iNextScanTime:
+            # Not yet time to scan, wait until next opportunity
+            continue
+        else:
+            iNextScanTime = iNow + 3*60*60
+
+        for sDevice in dStatus.values():
+            if not sDevice.nSlot:
+                # Not addressable, cannot ask for an update
+                continue
+            if not sDevice.time or (iNow - sDevice.time >STALE_THRESHOLD_SECONDS):
+                sLog.info(
+                    "%s status is stale, requesting update...",
+                    sDevice.rName)
+                sLink.send_command("!R{}F*r".format(sDevice.nSlot))
+
+        yield
+
 def main():
     dConfig = load_config()
 
@@ -583,7 +612,8 @@ def main():
     sLink.test_connectivity()
     sLink.scan_devices()
 
-    dStatus = {}
+    dStatus = {}    # rSerial: TRVStatus
+    siStaleScanner = scan_stale_devices()
 
     while True:
         try:
@@ -591,7 +621,6 @@ def main():
             # signals like SIGINT (KeyboardInterrupt) being delivered
             dResponse = sLink.sResponses.get(True, 3600)
         except sLink.sResponses.Empty:
-            # TODO Get status from any not recently seen
             continue
 
         if dResponse.get("fn") in (
@@ -623,6 +652,10 @@ def main():
             pass
         else:
             sLog.warn("Unhandled response:\n%s", dResponse)
+
+        # Request status updates from devices we've not seen for a while.
+        # Self-limits how often it performs scans.
+        siStaleScanner.next()
 
 if __name__ == "__main__":
     main()
