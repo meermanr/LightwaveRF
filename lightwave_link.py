@@ -594,7 +594,8 @@ def main():
             # TODO Get status from any not recently seen
             continue
 
-        if dResponse.get("fn") in ("read", "statusPush", "statusOn", "statusOff"):
+        if dResponse.get("fn") in (
+                "read", "statusPush", "statusOn", "statusOff"):
             rSerial = dResponse["serial"]
             if rSerial not in dStatus:
                 if rSerial not in dConfig:
