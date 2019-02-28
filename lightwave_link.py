@@ -592,7 +592,6 @@ def main():
             dResponse = sLink.sResponses.get(True, 3600)
         except sLink.sResponses.Empty:
             # TODO Get status from any not recently seen
-            # TODO: Alerting about any devices that are not responding
             continue
 
         if dResponse.get("fn") in ("read", "statusPush", "statusOn", "statusOff"):
@@ -606,8 +605,6 @@ def main():
                 dStatus[rSerial] = TRVStatus(rName)
             dStatus[rSerial].update(dResponse)
             sLog.info(str(dStatus[rSerial]))
-
-            # TODO: Alerting about low batteries
 
             # Try to avoid hysteria following sLink.scan_devices()
             if sLink.sResponses.empty():
