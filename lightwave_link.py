@@ -390,6 +390,11 @@ class TRVStatus(object):
         "0.0-1.0 where 0=valve fully closed, 1=valve fully open",
         ['serial', 'name', 'product'],
         )
+    sPtime = prometheus_client.Gauge(
+        "lwl_time",
+        "Unixtime of most recently received status update",
+        ['serial', 'name', 'product'],
+        )
 
     def __init__(self, rName):
         # Local data
@@ -440,6 +445,7 @@ class TRVStatus(object):
             self.sPcTargC.labels(*tLabels).set(float("NaN"))
             self.sPcTargR.labels(*tLabels).set(fRatio)
 
+        self.sPtime.labels(*tLabels).set(self.time)
 
     def get_battery_level_str(self):
         fBatt = self.batt
