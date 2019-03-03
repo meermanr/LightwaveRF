@@ -93,7 +93,7 @@ class LightwaveLink(object):
     def sequence_generator(iInt=None):
         import time
         if not iInt:
-            iInt = int(time.time())
+            iInt = 100
         while True:
             yield iInt
             iInt += 1
