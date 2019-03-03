@@ -58,14 +58,27 @@ class LightwaveLink(object):
             Sequence of messages received from the Lightwave Link. Note that
             because the Lightwave Link broadcasts all its responses, the
             responses may not be related to any commands sent by us.
+        sLock : threading.RLock
+            Mutual exclusion (mutex) lock that guards access to attributes.
         fLastCommandTime : float
             Unixtime when last command was issued. Used to implement rate
             limiting.
+        iLastTransactionNumber : int
+            Most recently transmitted transaction number sent by
+            `send_command`.
+        rLastCommand : str
+            Most recently transmitted command string sent by `send_command`.
+            Used to retransmit in response to "Transmit fail" errors from the
+            Lightwave Link.
     """
     LIGHTWAVE_LINK_COMMAND_PORT = 9760    # Send to this address...
     LIGHTWAVE_LINK_RESPONSE_PORT = 9761   # ... and get response on this one
     MIN_SECONDS_BETWEEN_COMMANDS = 3.0
     COMMAND_TIMEOUT_SECONDS = 5
+
+    fLastCommandTime = ProtectedAttribute()
+    iLastTransactionNumber = ProtectedAttribute()
+    rLastCommand = ProtectedAttribute()
 
     sPResponseDelay = prometheus_client.Gauge(
         "lwl_response_delay_seconds",
@@ -79,11 +92,15 @@ class LightwaveLink(object):
         )
 
     def __init__(self):
+        import threading
         self.sSock = self.create_socket()
         self.rAddress = "255.255.255.255"
         self.siTransactionNumber = self.sequence_generator()
         self.sResponses = self.create_listener(self.sSock)
-        self.fLastCommandTime = 0
+        self.sLock = threading.RLock()
+        self.fLastCommandTime = 0.0
+        self.iLastTransactionNumber = 0
+        self.rLastCommand = ""
         self.sThead = None
 
     def create_socket(self):
@@ -122,10 +139,15 @@ class LightwaveLink(object):
         if fWait > 0.0:
             sLog.log(5, "Rate limit send_command(): %s", fWait)
             time.sleep(fWait)
-        self.fLastCommandTime = time.time()
 
         if iTransactionNumber is None:
             iTransactionNumber = self.siTransactionNumber.next()
+
+        with self.sLock:
+            self.iLastTransactionNumber = iTransactionNumber
+            self.fLastCommandTime = time.time()
+            self.rLastCommand = rPayload
+
         rCommand = "{},{}".format(
             iTransactionNumber,
             rPayload)
