@@ -691,6 +691,7 @@ def main():
                 "hubCall",
                 "off",      # Human pushed button on TRV
                 "on",       # Human pushed button on TRV
+                "rfReinit",
                 "setTarget",
                 "setTime",
             ):
