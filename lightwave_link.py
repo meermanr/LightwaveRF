@@ -23,6 +23,20 @@ sLog = logging.getLogger('LightwaveLink')
 COMMAND = "!R{RoomNo}D{DeviceNo}F{FunctionType}P{Parameter}|{Line1}|{Line2}"
 
 # =============================================================================
+class ProtectedAttribute(object):
+    """
+    Descriptor which protects all data access (get, set) with its host
+    instance's `sLock` attribute.
+    """
+    def __get__(self, sHostInstance, clsType=None):
+        del clsType
+        with sHostInstance.sLock:
+            return self.mValue
+    def __set__(self, sHostInstance, mNewValue):
+        with sHostInstance.sLock:
+            self.mValue = mNewValue
+
+# =============================================================================
 class LightwaveLink(object):
     """
     :IVariables:
