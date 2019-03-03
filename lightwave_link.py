@@ -587,13 +587,17 @@ def scan_stale_devices(dStatus, sLink):
         iNow = time.time()
         if iNow < iNextScanTime:
             # Not yet time to scan, wait until next opportunity
-            continue
+            sLog.debug(
+                "Stale scan skipped, MIN_SCAN_INTERVAL_SECONDS not yet lapsed")
+            yield
         else:
-            iNextScanTime = iNow + 3*60*60
+            iNextScanTime = iNow + MIN_SCAN_INTERVAL_SECONDS
+            sLog.debug("Stale scan started")
 
         for sDevice in dStatus.values():
-            if not sDevice.nSlot:
+            if sDevice.nSlot is None:
                 # Not addressable, cannot ask for an update
+                sLog.debug("Device %s is not addressable", sDevice.rName)
                 continue
             if not sDevice.time or (iNow - sDevice.time >STALE_THRESHOLD_SECONDS):
                 sLog.info(
@@ -613,7 +617,7 @@ def main():
     sLink.scan_devices()
 
     dStatus = {}    # rSerial: TRVStatus
-    siStaleScanner = scan_stale_devices()
+    siStaleScanner = scan_stale_devices(dStatus, sLink)
 
     while True:
         try:
