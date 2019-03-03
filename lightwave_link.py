@@ -648,6 +648,8 @@ def main():
                 "getStatus",
                 "home",
                 "hubCall",
+                "off",      # Human pushed button on TRV
+                "on",       # Human pushed button on TRV
                 "setTarget",
                 "setTime",
             ):
