@@ -165,7 +165,12 @@ class LightwaveLink(object):
     def get_response(self):
         import time
         try:
-            dResponse = self.sResponses.get(True, self.COMMAND_TIMEOUT_SECONDS)
+            fTimeout = (
+                        self.COMMAND_TIMEOUT_SECONDS
+                        + time.time() 
+                        - self.fLastCommandTime 
+                        )
+            dResponse = self.sResponses.get(True, fTimeout)
             fDelay = time.time() - self.fLastCommandTime
             rFn = dResponse.get("fn", "")
             self.sPResponseDelay.labels(rFn).set(fDelay)
