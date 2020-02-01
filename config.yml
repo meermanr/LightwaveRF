@@ -10,6 +10,19 @@
 #
 #   $SERIAL_STR: $NAME_STR
 #
+# Notes
+#
+#   1. Serial strings should all be 6 characters long, excluding quotes
+#   2. Serial strings which are only numbers should be enclosed in quotes
+#   3. Numeric serial strings which start with a zero MUST be quoted
+#
+# Examples
+#
+# 1A2B3C:Device with unquoted serial string
+# '1A2B3C':Device with quoted serial string
+# '123456':Device with numeric serial string
+# '012345':Device with numeric serial string with leading zero
+#
 9993FE: Boiler switch
 5FC502: Lounge
 DBC302: Playroom
