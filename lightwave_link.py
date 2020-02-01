@@ -313,6 +313,14 @@ class LightwaveLink(object):
                         "Pairing request sent. Please push button with "
                         "flashing light on Lightwave Link to complete "
                         "pairing. (Or press ^C to give up)")
+                    sLog.info(
+                        "If the light on the Lightwave Link does not flash, "
+                        "you may already have the maximum 12 devices "
+                        "registered with it.")
+                    sLog.info(
+                        "To fix this you will need to use a device already "
+                        "registered with the Link to de-authorise all devices "
+                        "and individually re-authorise them.")
                     time.sleep(3)
                 elif dResponse.get("msg") == "success":
                     sLog.info("Successfully paired!")
