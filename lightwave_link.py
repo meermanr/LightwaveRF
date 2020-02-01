@@ -313,6 +313,14 @@ class LightwaveLink(object):
                         "Pairing request sent. Please push button with "
                         "flashing light on Lightwave Link to complete "
                         "pairing. (Or press ^C to give up)")
+                    sLog.info(
+                        "If the light on the Lightwave Link does not flash, "
+                        "you may already have the maximum 12 devices "
+                        "registered with it.")
+                    sLog.info(
+                        "To fix this you will need to use a device already "
+                        "registered with the Link to de-authorise all devices "
+                        "and individually re-authorise them.")
                     time.sleep(3)
                 elif dResponse.get("msg") == "success":
                     sLog.info("Successfully paired!")
@@ -573,6 +581,23 @@ def load_config():
     import yaml
     with file("config.yml", "r") as sFH:
         dConfig = yaml.load(sFH)
+
+    numeric_serials=[key for key in dConfig.keys() if key != str(key)]
+    if numeric_serials:
+        sLog.info(
+            "Found numeric serial strings %r in config file, attempting fix",
+            numeric_serials)
+        dConfig={str(key):value for (key,value) in dConfig.iteritems()}
+        sLog.debug("Config: %r",dConfig)
+
+    invalid_serials=[key for key in dConfig.keys() if len(key) != 6]
+    if invalid_serials:
+        sLog.warn(
+            "Found invalid serial strings %r in config file",
+            invalid_serials)
+        sLog.info("* Ensure serial strings are all 6 characters long")
+        sLog.info("* Enclose serial strings starting with a 0 in quotes")
+
     return dConfig
 
 def call_for_heat(sLink, dStatus):

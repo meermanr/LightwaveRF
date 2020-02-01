@@ -45,7 +45,9 @@ Some setup is required the first time the service is launched:
 
 When the service starts it broadcasts UDP traffic to find the Lightwave Link on your network.
 
-The first time this happens the Lightwave Link will respond with a "Not registered" error, indicating it does not recognise the MAC address of your host as authorised to issue commands to it. The service responds to this error by attempting to register with the Lightwave Link (... in an endless loop!). The Lightwave Link's one and only button will begin flashing its LED - go push it to authorise the MAC address of your host to issue commands.
+The first time this happens the Lightwave Link will respond with a "Not registered" error, indicating it does not recognise the MAC address of your host as authorised to issue commands to it. The service responds to this error by attempting to register with the Lightwave Link (... in an endless loop!). The Lightwave Link's one and only button should begin flashing its LED - go push it to authorise the MAC address of your host to issue commands.
+
+If there are already 12 devices registered with the Lightwave Link, new registration requests will be ignored. To register a new device, you will need to use an existing device to de-authorise all existing devices and reconnect only the ones you are using.
 
 If all is well, the service will log the following:
 
