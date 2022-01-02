@@ -25,15 +25,19 @@ services:
             - prometheus-volume:/app/data/
             - ./prometheus/prometheus.yml:/app/prometheus.yml:ro
     grafana:
-        image: grafana/grafana-arm32v7-linux:5.4.3
+        #image: grafana/grafana-arm32v7-linux:5.4.3
+        image: grafana/grafana
         depends_on:
             - prometheus
         # Listens for HTTP (TCP) traffic on 3000 (Grafana UI)
         network_mode: host
         environment:
-            - GF_SECURITY_ADMIN_PASSWORD=lightwave
-            - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
-            - GF_AUTH_ANONYMOUS_ENABLED=true
+            GF_AUTH_ANONYMOUS_ENABLED: 'true'
+            GF_PATHS_PROVISIONING: '/etc/grafana/provisioning'
+            GF_RENDERING_CALLBACK_URL: 'http://grafana:3000/'
+            GF_RENDERING_SERVER_URL: 'http://renderer:8081/render'
+            GF_SECURITY_ADMIN_PASSWORD: 'lightwave'
+            GF_SERVER_DOMAIN: 'teleport.local'
         volumes:
             - ./grafana/provisioning/:/etc/grafana/provisioning/:ro
             - grafana-volume:/var/lib/grafana
