@@ -681,14 +681,6 @@ def scan_stale_devices(dStatus, sLink):
             sLog.debug("Stale scan started")
 
         for sDevice in dStatus.values():
-            # TODO: Remove this after proving that messages should be addressed
-            # by sDevice.slot (room number), not nSlot (device's internal
-            # schedule that is currently in effect)
-            #
-            # if sDevice.nSlot is None:
-            #     # Not addressable, cannot ask for an update
-            #     sLog.debug("Device %s is not addressable", sDevice.rName)
-            #     continue
             if not sDevice.time or (iNow - sDevice.time >STALE_THRESHOLD_SECONDS):
                 sLog.info(
                     "%s status is stale, requesting update...",
