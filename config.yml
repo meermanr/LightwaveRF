@@ -22,12 +22,15 @@
 # '1A2B3C':Device with quoted serial string
 # '123456':Device with numeric serial string
 # '012345':Device with numeric serial string with leading zero
-#
-9993FE: Boiler switch
-5FC502: Lounge
-DBC302: Playroom
-DCC302: Hallway
-47C702: Front door
-CB3FFE: Small bedroom
-67C702: Back bedroom
+
 24C702: Master bedroom
+47C702: Front door
+5FC502: Lounge
+67C702: Back bedroom
+6E8002: Sewing area
+9993FE: Boiler switch
+A08A02: Cat tree
+CB3FFE: Small bedroom
+D88002: Play area
+DBC302: Breakfast area
+DCC302: Stairs
