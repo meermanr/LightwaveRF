@@ -11,13 +11,19 @@ services:
         # Listens for HTTP (TCP) traffic on 9191 (prometheus exporter)
         network_mode: host
     prometheus:
-        build:
-            context: prometheus/
-            dockerfile: Dockerfile.arm32v7
+        image: prom/prometheus
+        #build:
+        #    context: prometheus/
+        #    dockerfile: Dockerfile.arm32v7
         # Listens for HTTP (TCP) traffic on 9090 (prometheus UI)
         network_mode: host
+        command:
+          - --config.file=/app/prometheus.yml
+          - --storage.tsdb.path=/app/data/
+          - --storage.tsdb.retention.time=10y
         volumes:
             - prometheus-volume:/app/data/
+            - ./prometheus/prometheus.yml:/app/prometheus.yml:ro
     grafana:
         image: grafana/grafana-arm32v7-linux:5.4.3
         depends_on:
