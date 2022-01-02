@@ -22,6 +22,10 @@ sLog = logging.getLogger('LightwaveLink')
 
 COMMAND = "!R{RoomNo}D{DeviceNo}F{FunctionType}P{Parameter}|{Line1}|{Line2}"
 
+STALE_THRESHOLD_SECONDS   = 3*60*60  # 3h
+MIN_SCAN_INTERVAL_SECONDS =   30*60  # 30m
+
+
 # =============================================================================
 class ProtectedAttribute(object):
     """
@@ -73,8 +77,8 @@ class LightwaveLink(object):
     """
     LIGHTWAVE_LINK_COMMAND_PORT = 9760    # Send to this address...
     LIGHTWAVE_LINK_RESPONSE_PORT = 9761   # ... and get response on this one
-    MIN_SECONDS_BETWEEN_COMMANDS = 3.0
-    COMMAND_TIMEOUT_SECONDS = 5
+    MIN_SECONDS_BETWEEN_COMMANDS = 2
+    COMMAND_TIMEOUT_SECONDS = 15
 
     fLastCommandTime = ProtectedAttribute()
     iLastTransactionNumber = ProtectedAttribute()
@@ -631,11 +635,30 @@ def call_for_heat(sLink, dStatus):
     sLink.send_command(rCommand)
 
 def are_calling_for_heat(dStatus):
+    import time
+
+    fStaleThreshold = time.time() - STALE_THRESHOLD_SECONDS
+
+    # Special values for current target temperature:
+    #   50.0-60.0: 0-100% valve
+
     lCalling = []
     for sDevice in dStatus.itervalues():
         if sDevice.prod != "valve":
             continue
-        if sDevice.output:
+        elif sDevice.time < fStaleThreshold:
+            sLog.warn("Ignoring stale TRV: %s", sDevice)
+            continue
+        elif sDevice.cTarg == 50.0:
+            sLog.debug("Ignoring TRV with target OFF (50.0): %s", sDevice)
+        elif sDevice.cTarg > 50.0:
+            sLog.debug("Calling for heat via explicit non-closed valve: %s", sDevice)
+            lCalling.append(sDevice)
+        elif sDevice.cTarg < 50.0 and sDevice.cTarg > sDevice.cTemp:
+            sLog.debug("Calling for heat via ambient temp below target: %s", sDevice)
+            lCalling.append(sDevice)
+        elif sDevice.output:
+            sLog.debug("Calling for heat via open valve:%s ", sDevice)
             lCalling.append(sDevice)
 
     return lCalling
@@ -643,9 +666,6 @@ def are_calling_for_heat(dStatus):
 def scan_stale_devices(dStatus, sLink):
     # Generator which _may_ scan stale devices, if it hasn't done so recently
     import time
-
-    STALE_THRESHOLD_SECONDS   = 3*60*60  # 3h
-    MIN_SCAN_INTERVAL_SECONDS =   30*60  # 30m
 
     iNextScanTime = 0
 
