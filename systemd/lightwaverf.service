@@ -6,7 +6,7 @@ After=docker.service network.target
 [Service]
 Restart=always
 
-WorkingDirectory=/home/pi/LightwaveRF/
+WorkingDirectory=/home/pi/projects/LightwaveRF/
 
 # Compose up (create everything needed, inc. volumes and networks, etc)
 ExecStart=/usr/bin/env docker-compose up --build
