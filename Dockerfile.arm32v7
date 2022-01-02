@@ -1,11 +1,5 @@
 # Intended for use on a Raspberry Pi 3 (model B)
-FROM arm32v7/debian:8
-
-RUN apt-get update \
- && apt-get install -y \
-    python \
-    python-pip \
- && rm -rf /var/lib/apt/lists/*
+FROM python:2
 
 COPY ./requirements.txt /app/
 RUN pip install -r /app/requirements.txt
