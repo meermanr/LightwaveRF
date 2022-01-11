@@ -42,5 +42,14 @@ services:
         volumes:
             - ./grafana/provisioning/:/etc/grafana/provisioning/:ro
             - grafana-volume:/var/lib/grafana
+    socat:
+        image: alpine
+        network_mode: host
+        security_opt:
+          - seccomp=unconfined
+        command:
+          - /bin/sh
+          - -c
+          - apk add socat && socat -d TCP-LISTEN:80,fork TCP-CONNECT:127.0.0.1:3000
 
 # vim: set expandtab autoindent shiftwidth=2:
