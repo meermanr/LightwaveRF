@@ -1,3 +1,4 @@
+---
 version: "2"
 volumes:
     prometheus-volume:
@@ -41,3 +42,5 @@ services:
         volumes:
             - ./grafana/provisioning/:/etc/grafana/provisioning/:ro
             - grafana-volume:/var/lib/grafana
+
+# vim: set expandtab autoindent shiftwidth=2:
