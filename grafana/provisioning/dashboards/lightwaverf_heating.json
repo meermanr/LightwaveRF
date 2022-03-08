@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1641073662546,
+  "iteration": 1646734430804,
   "links": [],
   "panels": [
     {
@@ -163,7 +163,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
+        "w": 2.4,
         "x": 0,
         "y": 3
       },
@@ -259,8 +259,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 2.6666666666666665,
+        "w": 2.4,
+        "x": 2.4,
         "y": 3
       },
       "id": 219,
@@ -293,7 +293,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -356,8 +356,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 5.333333333333333,
+        "w": 2.4,
+        "x": 4.8,
         "y": 3
       },
       "id": 220,
@@ -390,7 +390,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -453,8 +453,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 8,
+        "w": 2.4,
+        "x": 7.199999999999999,
         "y": 3
       },
       "id": 221,
@@ -487,7 +487,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -550,8 +550,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 10.666666666666666,
+        "w": 2.4,
+        "x": 9.6,
         "y": 3
       },
       "id": 222,
@@ -584,7 +584,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -647,8 +647,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 13.333333333333332,
+        "w": 2.4,
+        "x": 12,
         "y": 3
       },
       "id": 223,
@@ -681,7 +681,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -744,8 +744,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 15.999999999999998,
+        "w": 2.4,
+        "x": 14.4,
         "y": 3
       },
       "id": 224,
@@ -778,7 +778,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -841,8 +841,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 18.666666666666664,
+        "w": 2.4,
+        "x": 16.8,
         "y": 3
       },
       "id": 225,
@@ -875,7 +875,104 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
+      "repeatPanelId": 26,
+      "scopedVars": {
+        "Room": {
+          "selected": false,
+          "text": "Sewing area",
+          "value": "Sewing area"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(0, 0, 0, .1)",
+        "full": false,
+        "lineColor": "rgb(52, 52, 52)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": ".1,.8",
+      "title": "$Room",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "rgba(31, 120, 193, 0)",
+        "rgba(237, 129, 40, 0.21)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "decimals": 0,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "format": "percentunit",
+      "gauge": {
+        "maxValue": 1,
+        "minValue": 0,
+        "show": true,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2.4,
+        "x": 19.2,
+        "y": 3
+      },
+      "id": 226,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "maxPerRow": 12,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeatDirection": "h",
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -938,11 +1035,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 21.333333333333332,
+        "w": 2.4,
+        "x": 21.599999999999998,
         "y": 3
       },
-      "id": 226,
+      "id": 227,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -972,7 +1069,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -1036,7 +1133,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
+        "w": 2.4,
         "x": 0,
         "y": 6
       },
@@ -1084,7 +1181,7 @@
         "lineColor": "rgb(86, 86, 86)",
         "show": false
       },
-      "tableColumn": "instance",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
@@ -1140,113 +1237,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 2.6666666666666665,
-        "y": 6
-      },
-      "id": 227,
-      "interval": null,
-      "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Breakfast area",
-          "value": "Breakfast area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "instance",
-      "targets": [
-        {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "-3,3",
-      "title": "$Room",
-      "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.6666666666666665,
-        "x": 5.333333333333333,
+        "w": 2.4,
+        "x": 2.4,
         "y": 6
       },
       "id": 228,
@@ -1279,13 +1271,13 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
           "selected": false,
-          "text": "Cat tree",
-          "value": "Cat tree"
+          "text": "Breakfast area",
+          "value": "Breakfast area"
         }
       },
       "sparkline": {
@@ -1294,7 +1286,7 @@
         "lineColor": "rgb(86, 86, 86)",
         "show": false
       },
-      "tableColumn": "instance",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
@@ -1350,8 +1342,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 8,
+        "w": 2.4,
+        "x": 4.8,
         "y": 6
       },
       "id": 229,
@@ -1384,13 +1376,13 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
           "selected": false,
-          "text": "Front door",
-          "value": "Front door"
+          "text": "Cat tree",
+          "value": "Cat tree"
         }
       },
       "sparkline": {
@@ -1399,7 +1391,7 @@
         "lineColor": "rgb(86, 86, 86)",
         "show": false
       },
-      "tableColumn": "instance",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
@@ -1455,8 +1447,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 10.666666666666666,
+        "w": 2.4,
+        "x": 7.199999999999999,
         "y": 6
       },
       "id": 230,
@@ -1489,7 +1481,112 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
+      "repeatPanelId": 70,
+      "scopedVars": {
+        "Room": {
+          "selected": false,
+          "text": "Front door",
+          "value": "Front door"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(255, 255, 255, 0.1)",
+        "full": false,
+        "lineColor": "rgb(86, 86, 86)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "-3,3",
+      "title": "$Room",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Off",
+          "value": "null"
+        },
+        {
+          "op": "=",
+          "text": "Off",
+          "value": "NaN"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorPostfix": false,
+      "colorValue": false,
+      "colors": [
+        "#1f78c1",
+        "rgba(234, 184, 57, 0.12)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "format": "celsius",
+      "gauge": {
+        "maxValue": 10,
+        "minValue": -10,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2.4,
+        "x": 9.6,
+        "y": 6
+      },
+      "id": 231,
+      "interval": null,
+      "links": [],
+      "mappingType": 2,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "maxPerRow": 12,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "Off",
+          "to": "null"
+        }
+      ],
+      "repeatDirection": "h",
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1560,11 +1657,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 13.333333333333332,
+        "w": 2.4,
+        "x": 12,
         "y": 6
       },
-      "id": 231,
+      "id": 232,
       "interval": null,
       "links": [],
       "mappingType": 2,
@@ -1594,7 +1691,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1665,11 +1762,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 15.999999999999998,
+        "w": 2.4,
+        "x": 14.4,
         "y": 6
       },
-      "id": 232,
+      "id": 233,
       "interval": null,
       "links": [],
       "mappingType": 2,
@@ -1699,7 +1796,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1714,7 +1811,7 @@
         "lineColor": "rgb(86, 86, 86)",
         "show": false
       },
-      "tableColumn": "instance",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
@@ -1770,11 +1867,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 18.666666666666664,
+        "w": 2.4,
+        "x": 16.8,
         "y": 6
       },
-      "id": 233,
+      "id": 234,
       "interval": null,
       "links": [],
       "mappingType": 2,
@@ -1804,7 +1901,112 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
+      "repeatPanelId": 70,
+      "scopedVars": {
+        "Room": {
+          "selected": false,
+          "text": "Sewing area",
+          "value": "Sewing area"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(255, 255, 255, 0.1)",
+        "full": false,
+        "lineColor": "rgb(86, 86, 86)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "format": "time_series",
+          "instant": true,
+          "interval": "",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "-3,3",
+      "title": "$Room",
+      "transparent": true,
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "Off",
+          "value": "null"
+        },
+        {
+          "op": "=",
+          "text": "Off",
+          "value": "NaN"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorPostfix": false,
+      "colorValue": false,
+      "colors": [
+        "#1f78c1",
+        "rgba(234, 184, 57, 0.12)",
+        "#d44a3a"
+      ],
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "format": "celsius",
+      "gauge": {
+        "maxValue": 10,
+        "minValue": -10,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2.4,
+        "x": 19.2,
+        "y": 6
+      },
+      "id": 235,
+      "interval": null,
+      "links": [],
+      "mappingType": 2,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "maxPerRow": 12,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "Off",
+          "to": "null"
+        }
+      ],
+      "repeatDirection": "h",
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1875,11 +2077,11 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 21.333333333333332,
+        "w": 2.4,
+        "x": 21.599999999999998,
         "y": 6
       },
-      "id": 234,
+      "id": 236,
       "interval": null,
       "links": [],
       "mappingType": 2,
@@ -1909,7 +2111,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1924,7 +2126,7 @@
         "lineColor": "rgb(86, 86, 86)",
         "show": false
       },
-      "tableColumn": "instance",
+      "tableColumn": "",
       "targets": [
         {
           "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
@@ -1979,7 +2181,7 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
+        "w": 2.4,
         "x": 0,
         "y": 9
       },
@@ -2037,7 +2239,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.4,3.0",
+      "thresholds": "2.7,10",
       "title": "$Room",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -2075,202 +2277,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 2.6666666666666665,
-        "y": 9
-      },
-      "id": 235,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Breakfast area",
-          "value": "Breakfast area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.4,3.0",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.6666666666666665,
-        "x": 5.333333333333333,
-        "y": 9
-      },
-      "id": 236,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Cat tree",
-          "value": "Cat tree"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.4,3.0",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.6666666666666665,
-        "x": 8,
+        "w": 2.4,
+        "x": 2.4,
         "y": 9
       },
       "id": 237,
@@ -2303,13 +2311,13 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
           "selected": false,
-          "text": "Front door",
-          "value": "Front door"
+          "text": "Breakfast area",
+          "value": "Breakfast area"
         }
       },
       "sparkline": {
@@ -2328,7 +2336,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.4,3.0",
+      "thresholds": "2.7,10",
       "title": "$Room",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -2366,8 +2374,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 10.666666666666666,
+        "w": 2.4,
+        "x": 4.8,
         "y": 9
       },
       "id": 238,
@@ -2400,13 +2408,13 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
           "selected": false,
-          "text": "Lounge",
-          "value": "Lounge"
+          "text": "Cat tree",
+          "value": "Cat tree"
         }
       },
       "sparkline": {
@@ -2425,7 +2433,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.4,3.0",
+      "thresholds": "2.7,10",
       "title": "$Room",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -2463,8 +2471,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 13.333333333333332,
+        "w": 2.4,
+        "x": 7.199999999999999,
         "y": 9
       },
       "id": 239,
@@ -2497,13 +2505,13 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
           "selected": false,
-          "text": "Master bedroom",
-          "value": "Master bedroom"
+          "text": "Front door",
+          "value": "Front door"
         }
       },
       "sparkline": {
@@ -2522,7 +2530,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.4,3.0",
+      "thresholds": "2.7,10",
       "title": "$Room",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -2560,8 +2568,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 15.999999999999998,
+        "w": 2.4,
+        "x": 9.6,
         "y": 9
       },
       "id": 240,
@@ -2594,13 +2602,13 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
           "selected": false,
-          "text": "Play area",
-          "value": "Play area"
+          "text": "Lounge",
+          "value": "Lounge"
         }
       },
       "sparkline": {
@@ -2619,7 +2627,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.4,3.0",
+      "thresholds": "2.7,10",
       "title": "$Room",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -2657,8 +2665,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 18.666666666666664,
+        "w": 2.4,
+        "x": 12,
         "y": 9
       },
       "id": 241,
@@ -2691,13 +2699,13 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
           "selected": false,
-          "text": "Small bedroom",
-          "value": "Small bedroom"
+          "text": "Master bedroom",
+          "value": "Master bedroom"
         }
       },
       "sparkline": {
@@ -2716,7 +2724,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.4,3.0",
+      "thresholds": "2.7,10",
       "title": "$Room",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -2754,8 +2762,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 2.6666666666666665,
-        "x": 21.333333333333332,
+        "w": 2.4,
+        "x": 14.4,
         "y": 9
       },
       "id": 242,
@@ -2788,7 +2796,298 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
+      "repeatPanelId": 90,
+      "scopedVars": {
+        "Room": {
+          "selected": false,
+          "text": "Play area",
+          "value": "Play area"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "2.7,10",
+      "title": "$Room",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(98, 158, 81, 0)",
+        "#1f78c1"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "format": "volt",
+      "gauge": {
+        "maxValue": 3,
+        "minValue": 2,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2.4,
+        "x": 16.8,
+        "y": 9
+      },
+      "id": 243,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "maxPerRow": 12,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeatDirection": "h",
+      "repeatIteration": 1646734430804,
+      "repeatPanelId": 90,
+      "scopedVars": {
+        "Room": {
+          "selected": false,
+          "text": "Sewing area",
+          "value": "Sewing area"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "2.7,10",
+      "title": "$Room",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(98, 158, 81, 0)",
+        "#1f78c1"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "format": "volt",
+      "gauge": {
+        "maxValue": 3,
+        "minValue": 2,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2.4,
+        "x": 19.2,
+        "y": 9
+      },
+      "id": 244,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "maxPerRow": 12,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeatDirection": "h",
+      "repeatIteration": 1646734430804,
+      "repeatPanelId": 90,
+      "scopedVars": {
+        "Room": {
+          "selected": false,
+          "text": "Small bedroom",
+          "value": "Small bedroom"
+        }
+      },
+      "sparkline": {
+        "fillColor": "rgba(31, 118, 189, 0.18)",
+        "full": false,
+        "lineColor": "rgb(31, 120, 193)",
+        "show": false
+      },
+      "tableColumn": "",
+      "targets": [
+        {
+          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "format": "time_series",
+          "instant": true,
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": "2.7,10",
+      "title": "$Room",
+      "type": "singlestat",
+      "valueFontSize": "80%",
+      "valueMaps": [
+        {
+          "op": "=",
+          "text": "N/A",
+          "value": "null"
+        }
+      ],
+      "valueName": "current"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": true,
+      "colorValue": false,
+      "colors": [
+        "#d44a3a",
+        "rgba(98, 158, 81, 0)",
+        "#1f78c1"
+      ],
+      "datasource": null,
+      "decimals": 2,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "format": "volt",
+      "gauge": {
+        "maxValue": 3,
+        "minValue": 2,
+        "show": false,
+        "thresholdLabels": false,
+        "thresholdMarkers": false
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2.4,
+        "x": 21.599999999999998,
+        "y": 9
+      },
+      "id": 245,
+      "interval": null,
+      "links": [],
+      "mappingType": 1,
+      "mappingTypes": [
+        {
+          "name": "value to text",
+          "value": 1
+        },
+        {
+          "name": "range to text",
+          "value": 2
+        }
+      ],
+      "maxDataPoints": 100,
+      "maxPerRow": 12,
+      "nullPointMode": "connected",
+      "nullText": null,
+      "postfix": "",
+      "postfixFontSize": "50%",
+      "prefix": "",
+      "prefixFontSize": "50%",
+      "rangeMaps": [
+        {
+          "from": "null",
+          "text": "N/A",
+          "to": "null"
+        }
+      ],
+      "repeatDirection": "h",
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2813,7 +3112,7 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.4,3.0",
+      "thresholds": "2.7,10",
       "title": "$Room",
       "type": "singlestat",
       "valueFontSize": "80%",
@@ -3014,7 +3313,7 @@
         "y": 13
       },
       "hiddenSeries": false,
-      "id": 243,
+      "id": 246,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -3039,7 +3338,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3165,7 +3464,7 @@
         "y": 13
       },
       "hiddenSeries": false,
-      "id": 244,
+      "id": 247,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -3190,7 +3489,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3316,7 +3615,7 @@
         "y": 13
       },
       "hiddenSeries": false,
-      "id": 245,
+      "id": 248,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -3341,7 +3640,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3467,7 +3766,7 @@
         "y": 19
       },
       "hiddenSeries": false,
-      "id": 246,
+      "id": 249,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -3492,7 +3791,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3618,7 +3917,7 @@
         "y": 19
       },
       "hiddenSeries": false,
-      "id": 247,
+      "id": 250,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -3643,7 +3942,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3769,7 +4068,7 @@
         "y": 19
       },
       "hiddenSeries": false,
-      "id": 248,
+      "id": 251,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -3794,7 +4093,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3920,7 +4219,7 @@
         "y": 19
       },
       "hiddenSeries": false,
-      "id": 249,
+      "id": 252,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -3945,7 +4244,158 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
+      "repeatPanelId": 2,
+      "scopedVars": {
+        "Room": {
+          "selected": false,
+          "text": "Sewing area",
+          "value": "Sewing area"
+        }
+      },
+      "seriesOverrides": [
+        {
+          "alias": "Output",
+          "fill": 1,
+          "linewidth": 0,
+          "yaxis": 2
+        },
+        {
+          "alias": "Target Output",
+          "dashes": true,
+          "yaxis": 2
+        },
+        {
+          "alias": "Target Temperature",
+          "dashes": true
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "format": "time_series",
+          "interval": "",
+          "intervalFactor": 1,
+          "legendFormat": "Actual Temperature",
+          "refId": "A"
+        },
+        {
+          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Target Temperature",
+          "refId": "B"
+        },
+        {
+          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Output",
+          "refId": "C"
+        },
+        {
+          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "Target Output",
+          "refId": "D"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "$Room",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "celsius",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "decimals": 0,
+          "format": "percentunit",
+          "label": "",
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": true,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "Actual Temperature": "#6ed0e0",
+        "Output": "#f2c96d",
+        "Target Output": "#967302",
+        "Target Temperature": "#967302"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {},
+        "overrides": []
+      },
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 6,
+        "w": 6,
+        "x": 0,
+        "y": 25
+      },
+      "hiddenSeries": false,
+      "id": 253,
+      "legend": {
+        "alignAsTable": false,
+        "avg": false,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": false,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.5.4",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "h",
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -4067,11 +4517,11 @@
       "gridPos": {
         "h": 6,
         "w": 6,
-        "x": 0,
+        "x": 6,
         "y": 25
       },
       "hiddenSeries": false,
-      "id": 250,
+      "id": 254,
       "legend": {
         "alignAsTable": false,
         "avg": false,
@@ -4096,7 +4546,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1641073662546,
+      "repeatIteration": 1646734430804,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -4571,11 +5021,12 @@
     },
     {
       "alert": {
+        "alertRuleTags": {},
         "conditions": [
           {
             "evaluator": {
               "params": [
-                2.45
+                2.7
               ],
               "type": "lt"
             },
@@ -4667,7 +5118,7 @@
           "fill": true,
           "line": true,
           "op": "lt",
-          "value": 2.45,
+          "value": 2.7,
           "visible": true
         }
       ],
@@ -4977,5 +5428,5 @@
   "timezone": "",
   "title": "LightwaveRF Heating",
   "uid": "LJ_reSigk",
-  "version": 5
+  "version": 6
 }
