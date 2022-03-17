@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "iteration": 1646734430804,
+  "iteration": 1647547216846,
   "links": [],
   "panels": [
     {
@@ -293,7 +293,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -390,7 +390,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -487,7 +487,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -584,7 +584,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -681,7 +681,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -778,7 +778,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -875,7 +875,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -972,7 +972,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -1069,7 +1069,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 26,
       "scopedVars": {
         "Room": {
@@ -1109,27 +1109,42 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1140,32 +1155,24 @@
       "id": 70,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeat": "Room",
       "repeatDirection": "h",
       "scopedVars": {
@@ -1175,65 +1182,60 @@
           "value": "Back bedroom"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1244,34 +1246,26 @@
       "id": 228,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1280,65 +1274,60 @@
           "value": "Breakfast area"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1349,34 +1338,26 @@
       "id": 229,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1385,65 +1366,60 @@
           "value": "Cat tree"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1454,34 +1430,26 @@
       "id": 230,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1490,65 +1458,60 @@
           "value": "Front door"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1559,34 +1522,26 @@
       "id": 231,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1595,65 +1550,60 @@
           "value": "Lounge"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1664,34 +1614,26 @@
       "id": 232,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1700,65 +1642,60 @@
           "value": "Master bedroom"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1769,34 +1706,26 @@
       "id": 233,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1805,65 +1734,60 @@
           "value": "Play area"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1874,34 +1798,26 @@
       "id": 234,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -1910,65 +1826,60 @@
           "value": "Sewing area"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -1979,34 +1890,26 @@
       "id": 235,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -2015,65 +1918,60 @@
           "value": "Small bedroom"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "#1f78c1",
-        "rgba(234, 184, 57, 0.12)",
-        "#d44a3a"
-      ],
       "datasource": null,
       "description": "",
       "fieldConfig": {
-        "defaults": {},
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "from": "null",
+              "id": 0,
+              "text": "Off",
+              "to": "null",
+              "type": 2
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#1f78c1",
+                "value": null
+              },
+              {
+                "color": "rgba(234, 184, 57, 0.12)",
+                "value": 18
+              },
+              {
+                "color": "#d44a3a",
+                "value": 23
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
         "overrides": []
-      },
-      "format": "celsius",
-      "gauge": {
-        "maxValue": 10,
-        "minValue": -10,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
       },
       "gridPos": {
         "h": 3,
@@ -2084,34 +1982,26 @@
       "id": 236,
       "interval": null,
       "links": [],
-      "mappingType": 2,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
       "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "Off",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "7.5.4",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 70,
       "scopedVars": {
         "Room": {
@@ -2120,41 +2010,21 @@
           "value": "Stairs"
         }
       },
-      "sparkline": {
-        "fillColor": "rgba(255, 255, 255, 0.1)",
-        "full": false,
-        "lineColor": "rgb(86, 86, 86)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"} - (lwl_target_celsius{name=\"$Room\"} > 0)",
+          "exemplar": true,
+          "expr": "lwl_current_celsius{name=\"$Room\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
         }
       ],
-      "thresholds": "-3,3",
       "title": "$Room",
       "transparent": true,
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "null"
-        },
-        {
-          "op": "=",
-          "text": "Off",
-          "value": "NaN"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "cacheTimeout": null,
@@ -2311,7 +2181,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2408,7 +2278,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2505,7 +2375,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2602,7 +2472,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2699,7 +2569,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2796,7 +2666,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2893,7 +2763,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -2990,7 +2860,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -3087,7 +2957,7 @@
         }
       ],
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 90,
       "scopedVars": {
         "Room": {
@@ -3338,7 +3208,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3489,7 +3359,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3640,7 +3510,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3791,7 +3661,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -3942,7 +3812,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -4093,7 +3963,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -4244,7 +4114,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -4395,7 +4265,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -4546,7 +4416,7 @@
       "points": false,
       "renderer": "flot",
       "repeatDirection": "h",
-      "repeatIteration": 1646734430804,
+      "repeatIteration": 1647547216846,
       "repeatPanelId": 2,
       "scopedVars": {
         "Room": {
@@ -5362,7 +5232,7 @@
       {
         "allValue": null,
         "current": {
-          "selected": true,
+          "selected": false,
           "text": [
             "All"
           ],
@@ -5397,7 +5267,7 @@
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {
@@ -5428,5 +5298,5 @@
   "timezone": "",
   "title": "LightwaveRF Heating",
   "uid": "LJ_reSigk",
-  "version": 6
+  "version": 7
 }
