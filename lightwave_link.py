@@ -98,7 +98,7 @@ class LightwaveLink(object):
     def __init__(self):
         import threading
         self.sSock = self.create_socket()
-        self.rAddress = "255.255.255.255"
+        self.rAddress = "192.168.167.114"
         self.siTransactionNumber = self.sequence_generator()
         self.sResponses = self.create_listener(self.sSock)
         self.sLock = threading.RLock()
