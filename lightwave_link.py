@@ -344,7 +344,7 @@ class LightwaveLink(object):
                 pass
         sLog.info("%s devices", len(lRooms))
         for i, iDevice in enumerate(lRooms):
-            sLog.info("Asking device #%s to provide status update...", i)
+            sLog.info("Asking room #%s to provide status update...", iDevice)
             # Get device info (serial + room in same JSON response!)
             self.send_command("@?R{}".format(iDevice))
             # Request status report from device
@@ -461,7 +461,7 @@ class TRVStatus(object):
         self.mac = None
         self.nSlot = None
         self.nTarg = None
-        self.output = None
+        self.output = None  # 0-100 (inc.)
         self.pkt = None
         self.prod = None
         self.prof = None
@@ -643,23 +643,45 @@ def are_calling_for_heat(dStatus):
     #   50.0-60.0: 0-100% valve
 
     lCalling = []
+    lMessages = []
+    iMaxNameLen = 0
     for sDevice in dStatus.itervalues():
+        rDecision = ""
         if sDevice.prod != "valve":
+            rDecision = "n/a (not a valve)"
             continue
         elif sDevice.time < fStaleThreshold:
-            sLog.warn("Ignoring stale TRV: %s", sDevice)
+            rDecision = "ignored, stale status"
             continue
         elif sDevice.cTarg == 50.0:
-            sLog.debug("Ignoring TRV with target OFF (50.0): %s", sDevice)
+            rDecision = "ignored, target OFF (50.0)"
         elif sDevice.cTarg > 50.0:
-            sLog.debug("Calling for heat via explicit non-closed valve: %s", sDevice)
+            rDecision = "calling for heat, explicit non-zero valve opening (>50.0)"
             lCalling.append(sDevice)
-        elif sDevice.cTarg < 50.0 and sDevice.cTarg > sDevice.cTemp:
-            sLog.debug("Calling for heat via ambient temp below target: %s", sDevice)
+        #elif sDevice.cTarg < 50.0 and sDevice.cTarg > sDevice.cTemp:
+        #    sLog.debug("Calling for heat via ambient temp below target: %s", sDevice)
+        #    lCalling.append(sDevice)
+        elif 0 == sDevice.output:
+            rDecision = "ignored, valve closed"
+        elif 0 < sDevice.output < 50:
+            rDecision = "ignored, valve open, but less than 50%"
+        elif 50 <= sDevice.output:
+            rDecision = "calling for heat, valve open >= 50%"
             lCalling.append(sDevice)
-        elif sDevice.output:
-            sLog.debug("Calling for heat via open valve:%s ", sDevice)
-            lCalling.append(sDevice)
+        else:
+            rDecision = "(default)"
+
+        iMaxNameLen = max(iMaxNameLen, len(sDevice.rName))
+        lMessages.append( (sDevice.rName, rDecision) )
+
+    for i, (rName, rDecision) in enumerate(lMessages):
+        lMessages[i] = "  {:>{width}}: {}".format(
+                rName,
+                rDecision,
+                width=iMaxNameLen)
+
+    rMessage = "\n".join(lMessages)
+    sLog.info("Calling for heat:\n%s" % rMessage)
 
     return lCalling
 
