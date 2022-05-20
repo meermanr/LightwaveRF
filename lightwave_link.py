@@ -208,7 +208,8 @@ class LightwaveLink(object):
                     rJSON = rMessage[len("*!"):]
                     dMessage = json.loads(rJSON)
                     iResponseTrans = int(dMessage.get("trans", 0))
-                    if iResponseTrans > iTransactionNumber:
+                    #if iResponseTrans > iTransactionNumber:
+                    if True:
                         iTransactionNumber = iResponseTrans
                         sQueue.put(dMessage)
                     else:
