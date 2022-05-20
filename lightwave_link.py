@@ -746,5 +746,7 @@ def main():
         # Self-limits how often it performs scans.
         siStaleScanner.next()
 
+        sLog.debug("End of loop")
+
 if __name__ == "__main__":
     main()
