@@ -53,8 +53,8 @@ services:
         environment:
             GF_AUTH_ANONYMOUS_ENABLED: 'true'
             GF_PATHS_PROVISIONING: '/etc/grafana/provisioning'
-            GF_RENDERING_CALLBACK_URL: 'http://grafana:3000/'
-            GF_RENDERING_SERVER_URL: 'http://renderer:8081/render'
+            #GF_RENDERING_CALLBACK_URL: 'http://grafana:3000/'
+            #GF_RENDERING_SERVER_URL: 'http://renderer:8081/render'
             GF_SECURITY_ADMIN_PASSWORD: 'lightwave'
             GF_SERVER_ROOT_URL: 'http://grafana-lightwaverf.teleport.local'
         volumes:
