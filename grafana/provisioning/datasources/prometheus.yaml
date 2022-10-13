@@ -14,7 +14,7 @@ datasources:
   # <int> org id. will default to orgId 1 if not specified
   orgId: 1
   # <string> url
-  url: http://localhost:9090
+  url: http://prometheus:9090
   # <bool> mark as default datasource. Max one per org
   isDefault: true
   # <bool> allow users to edit datasources from the UI.

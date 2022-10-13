@@ -11,13 +11,25 @@ services:
         # Listens for UDP broadcast traffic on port 9761 (LightwaveRF responses)
         # Listens for HTTP (TCP) traffic on 9191 (prometheus exporter)
         network_mode: host
+        restart: unless-stopped
     prometheus:
         image: prom/prometheus
         #build:
         #    context: prometheus/
         #    dockerfile: Dockerfile.arm32v7
         # Listens for HTTP (TCP) traffic on 9090 (prometheus UI)
-        network_mode: host
+        ports:
+          - 9090
+        #network_mode: host
+        networks:
+          - traefik-public
+          - default
+        labels:
+          - traefik.docker.network=traefik-public
+        extra_hosts:
+          - host.docker.internal:host-gateway
+        security_opt:
+          - seccomp:unconfined
         command:
           - --config.file=/app/prometheus.yml
           - --storage.tsdb.path=/app/data/
@@ -25,20 +37,26 @@ services:
         volumes:
             - prometheus-volume:/app/data/
             - ./prometheus/prometheus.yml:/app/prometheus.yml:ro
+        restart: unless-stopped
     grafana:
-        #image: grafana/grafana-arm32v7-linux:5.4.3
         image: grafana/grafana
         depends_on:
             - prometheus
         # Listens for HTTP (TCP) traffic on 3000 (Grafana UI)
-        network_mode: host
+        ports:
+          - 3000
+        networks:
+          - traefik-public
+          - default
+        labels:
+          - traefik.docker.network=traefik-public
         environment:
             GF_AUTH_ANONYMOUS_ENABLED: 'true'
             GF_PATHS_PROVISIONING: '/etc/grafana/provisioning'
             GF_RENDERING_CALLBACK_URL: 'http://grafana:3000/'
             GF_RENDERING_SERVER_URL: 'http://renderer:8081/render'
             GF_SECURITY_ADMIN_PASSWORD: 'lightwave'
-            GF_SERVER_DOMAIN: 'teleport.local'
+            GF_SERVER_ROOT_URL: 'http://grafana-lightwaverf.teleport.local'
         volumes:
             - ./grafana/provisioning/:/etc/grafana/provisioning/:ro
             - grafana-volume:/var/lib/grafana
@@ -47,14 +65,20 @@ services:
             - 8.8.4.4
             - 1.1.1.1
             - 8.8.8.8
-    socat:
-        image: alpine
-        network_mode: host
-        security_opt:
-          - seccomp=unconfined
-        command:
-          - /bin/sh
-          - -c
-          - apk add socat && socat -d TCP-LISTEN:80,fork TCP-CONNECT:127.0.0.1:3000
+        restart: unless-stopped
+#    socat:
+#        image: alpine
+#        network_mode: host
+#        security_opt:
+#          - seccomp=unconfined
+#        command:
+#          - /bin/sh
+#          - -c
+#          - apk add socat && socat -d TCP-LISTEN:80,fork TCP-CONNECT:127.0.0.1:3000
+#        restart: unless-stopped
+
+networks:
+  traefik-public:
+    external: true
 
 # vim: set expandtab autoindent shiftwidth=2:
