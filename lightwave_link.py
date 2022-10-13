@@ -651,6 +651,13 @@ def are_calling_for_heat(dStatus):
         if sDevice.prod != "valve":
             rDecision = "n/a (not a valve)"
             continue
+        elif 50 <= sDevice.output:
+            rDecision = "calling for heat, valve open >= 50%"
+            lCalling.append(sDevice)
+        elif 0 == sDevice.output:
+            rDecision = "ignored, valve closed"
+        elif 0 < sDevice.output < 50:
+            rDecision = "ignored, valve open, but less than 50%"
         elif sDevice.time < fStaleThreshold:
             rDecision = "ignored, stale status"
             continue
@@ -662,13 +669,6 @@ def are_calling_for_heat(dStatus):
         #elif sDevice.cTarg < 50.0 and sDevice.cTarg > sDevice.cTemp:
         #    sLog.debug("Calling for heat via ambient temp below target: %s", sDevice)
         #    lCalling.append(sDevice)
-        elif 0 == sDevice.output:
-            rDecision = "ignored, valve closed"
-        elif 0 < sDevice.output < 50:
-            rDecision = "ignored, valve open, but less than 50%"
-        elif 50 <= sDevice.output:
-            rDecision = "calling for heat, valve open >= 50%"
-            lCalling.append(sDevice)
         else:
             rDecision = "(default)"
 
