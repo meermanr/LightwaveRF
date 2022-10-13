@@ -112,7 +112,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"Boiler switch\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"Boiler switch\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -214,7 +214,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -311,7 +311,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -408,7 +408,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -505,7 +505,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -602,7 +602,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -699,7 +699,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -796,7 +796,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -893,7 +893,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -990,7 +990,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -1087,7 +1087,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -1185,7 +1185,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1277,7 +1277,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1369,7 +1369,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1461,7 +1461,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1553,7 +1553,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1645,7 +1645,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1737,7 +1737,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1829,7 +1829,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -1921,7 +1921,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2013,7 +2013,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -2102,7 +2102,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2199,7 +2199,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2296,7 +2296,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2393,7 +2393,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2490,7 +2490,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2587,7 +2587,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2684,7 +2684,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2781,7 +2781,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2878,7 +2878,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -2975,7 +2975,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "lwl_battery_volts{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
           "format": "time_series",
           "instant": true,
           "intervalFactor": 1,
@@ -3088,7 +3088,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -3096,21 +3096,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -3239,7 +3239,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -3247,21 +3247,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -3390,7 +3390,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -3398,21 +3398,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -3541,7 +3541,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -3549,21 +3549,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -3692,7 +3692,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -3700,21 +3700,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -3843,7 +3843,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -3851,21 +3851,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -3994,7 +3994,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -4002,21 +4002,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -4145,7 +4145,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -4153,21 +4153,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -4296,7 +4296,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -4304,21 +4304,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -4447,7 +4447,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_current_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -4455,21 +4455,21 @@
           "refId": "A"
         },
         {
-          "expr": "lwl_target_celsius{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Temperature",
           "refId": "B"
         },
         {
-          "expr": "lwl_output_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Output",
           "refId": "C"
         },
         {
-          "expr": "lwl_target_ratio{name=\"$Room\"}",
+          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Target Output",
@@ -4974,7 +4974,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "lwl_battery_volts{product=\"valve\"}",
+          "expr": "max without (instance) (lwl_battery_volts{product=\"valve\"})",
           "format": "time_series",
           "interval": "",
           "intervalFactor": 1,
@@ -5122,7 +5122,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "time() - last_over_time(lwl_time{product=\"valve\"}[10y])",
+          "expr": "time() - max(last_over_time(lwl_time{product=\"valve\"}[90d]) ) by (name)",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -5206,7 +5206,7 @@
           ]
         },
         "datasource": "Prometheus",
-        "definition": "query_result(irate(lwl_time{job=\"lwl\",product=\"valve\"}[4w]))",
+        "definition": "query_result(max without (instance) (last_over_time( lwl_time{job=\"lwl\",product=\"valve\"}[4w] )))",
         "description": null,
         "error": null,
         "hide": 0,
@@ -5216,7 +5216,7 @@
         "name": "Room",
         "options": [],
         "query": {
-          "query": "query_result(irate(lwl_time{job=\"lwl\",product=\"valve\"}[4w]))",
+          "query": "query_result(max without (instance) (last_over_time( lwl_time{job=\"lwl\",product=\"valve\"}[4w] )))",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -5241,7 +5241,7 @@
           ]
         },
         "datasource": "Prometheus",
-        "definition": "query_result(irate(lwl_time{job=\"lwl\",product=\"electr\"}[4w]))",
+        "definition": "query_result(max without (instance) (last_over_time( lwl_time{job=\"lwl\",product=\"electr\"}[4w] )))",
         "description": null,
         "error": null,
         "hide": 0,
@@ -5251,7 +5251,7 @@
         "name": "Switch",
         "options": [],
         "query": {
-          "query": "query_result(irate(lwl_time{job=\"lwl\",product=\"electr\"}[4w]))",
+          "query": "query_result(max without (instance) (last_over_time( lwl_time{job=\"lwl\",product=\"electr\"}[4w] )))",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
