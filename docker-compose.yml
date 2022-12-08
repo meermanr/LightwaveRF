@@ -39,7 +39,7 @@ services:
             - ./prometheus/prometheus.yml:/app/prometheus.yml:ro
         restart: unless-stopped
     grafana:
-        image: grafana/grafana
+        image: grafana/grafana:8.5.14
         depends_on:
             - prometheus
         # Listens for HTTP (TCP) traffic on 3000 (Grafana UI)
