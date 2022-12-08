@@ -249,6 +249,8 @@ class LightwaveLink(object):
         dResponse = self.get_response()
 
         # Sample successful response from hub-call:
+        # TODO: Account for non-zero timeZone, which offsets the timestamps by
+        # ±hours. (WTF?)
         """
         {"trans":160,           "mac":"20:3B:85",
          "time":1545002320,     "pkt":"system",
@@ -538,6 +540,10 @@ class TRVStatus(object):
 
     def __str__(self):
         import textwrap
+        import time
+
+        rTime = time.strftime("%Y-%m-%d %H:%M:%S %z", time.gmtime(self.time))
+        dLocals = locals()
 
         # Data only available if we've received a status update, otherwise may
         # raise AttributeError.
@@ -547,10 +553,10 @@ class TRVStatus(object):
                      prod: {self.prod}
                    serial: {self.serial}
                      slot: {self.slot}
-                     time: {self.time}
+                     time: {self.time} ({rTime})
                     trans: {self.trans}
                 """.format(
-                    self=self,
+                    **dLocals
                     ))
 
         # pylint: disable=unused-variable
@@ -574,7 +580,7 @@ class TRVStatus(object):
                serial: {self.serial}
                  slot: {self.slot}
                 state: {self.state}
-                 time: {self.time}
+                 time: {self.time} ({rTime})
                 trans: {self.trans}
                  type: {self.type}
                   ver: {self.ver}
