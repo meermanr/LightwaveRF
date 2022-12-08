@@ -51,6 +51,7 @@ services:
         labels:
           - traefik.docker.network=traefik-public
         environment:
+            GF_DEFAULT_FORCE_MIGRATION: 'true'
             GF_AUTH_ANONYMOUS_ENABLED: 'true'
             GF_PATHS_PROVISIONING: '/etc/grafana/provisioning'
             #GF_RENDERING_CALLBACK_URL: 'http://grafana:3000/'
