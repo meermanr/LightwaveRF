@@ -3,29 +3,191 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
-  "gnetId": null,
+  "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "iteration": 1647547216846,
+  "iteration": 1670494059739,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Sum of all radiators with a target temperature vs the current ambient temperature.\n\nRadiators can be in one of three states:\n\n- OFF\n- Target valve opening\n- Target ambient temperature\n\nThis chart is limited to those with an ambient temperature target.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 1,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": -2
+              },
+              {
+                "color": "yellow",
+                "value": 2
+              },
+              {
+                "color": "orange",
+                "value": 4
+              },
+              {
+                "color": "red",
+                "value": 6
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 260,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "expr": "sum( lwl_current_celsius - (50 > lwl_target_celsius >= 0) )",
+          "refId": "A"
+        }
+      ],
+      "title": "Deviation from target temperature",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
+      "description": "Number of completely-open radiator valves",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 2
+              },
+              {
+                "color": "orange",
+                "value": 4
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 258,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.14",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "expr": "sum(lwl_output_ratio{product=\"valve\"})",
+          "refId": "A"
+        }
+      ],
+      "title": "Demand",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 8
       },
       "id": 42,
       "panels": [],
@@ -33,83 +195,75 @@
       "type": "row"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorPostfix": false,
-      "colorValue": false,
-      "colors": [
-        "rgba(68, 126, 188, 0)",
-        "rgba(237, 129, 40, 0.89)",
-        "#508642"
-      ],
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
       },
-      "format": "none",
-      "gauge": {
-        "maxValue": 100,
-        "minValue": 0,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": true
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "text": "OFF"
+                },
+                "0.01": {
+                  "text": "ON"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(68, 126, 188, 0)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.89)",
+                "value": 0.005
+              },
+              {
+                "color": "#508642",
+                "value": 0.01
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 2,
         "w": 24,
         "x": 0,
-        "y": 1
+        "y": 9
       },
       "id": 18,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "OFF",
-          "to": "null"
+      "options": {
+        "colorMode": "background",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
         },
-        {
-          "from": "0.0005",
-          "text": "ON",
-          "to": "1.0"
-        }
-      ],
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.14",
       "repeat": "Switch",
       "repeatDirection": "v",
-      "scopedVars": {
-        "Switch": {
-          "selected": false,
-          "text": "Boiler switch",
-          "value": "Boiler switch"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(66, 66, 66, .1)",
-        "full": false,
-        "lineColor": "rgb(94, 94, 94)",
-        "show": true
-      },
-      "tableColumn": "",
       "targets": [
         {
           "expr": "max without (instance) (lwl_output_ratio{name=\"Boiler switch\"})",
@@ -120,98 +274,78 @@
           "refId": "A"
         }
       ],
-      "thresholds": "0.005,0.01",
       "title": "$Switch",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "OFF",
-          "value": "0"
-        },
-        {
-          "op": "=",
-          "text": "ON",
-          "value": "0.01"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
       },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 0,
+          "mappings": [
+            {
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "rgba(31, 120, 193, 0)",
+                "value": null
+              },
+              {
+                "color": "rgba(237, 129, 40, 0.21)",
+                "value": 0.1
+              },
+              {
+                "color": "#d44a3a",
+                "value": 0.8
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
       },
       "gridPos": {
         "h": 3,
-        "w": 2.4,
+        "w": 6,
         "x": 0,
-        "y": 3
+        "y": 11
       },
       "id": 26,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "8.5.14",
       "repeat": "Room",
       "repeatDirection": "h",
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Back bedroom",
-          "value": "Back bedroom"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
           "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
@@ -221,895 +355,14 @@
           "refId": "A"
         }
       ],
-      "thresholds": ".1,.8",
       "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "type": "gauge"
     },
     {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
       },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 2.4,
-        "y": 3
-      },
-      "id": 219,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Breakfast area",
-          "value": "Breakfast area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 4.8,
-        "y": 3
-      },
-      "id": 220,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Cat tree",
-          "value": "Cat tree"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 7.199999999999999,
-        "y": 3
-      },
-      "id": 221,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Front door",
-          "value": "Front door"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 9.6,
-        "y": 3
-      },
-      "id": 222,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Lounge",
-          "value": "Lounge"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 12,
-        "y": 3
-      },
-      "id": 223,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Master bedroom",
-          "value": "Master bedroom"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 14.4,
-        "y": 3
-      },
-      "id": 224,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Play area",
-          "value": "Play area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 16.8,
-        "y": 3
-      },
-      "id": 225,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Sewing area",
-          "value": "Sewing area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 19.2,
-        "y": 3
-      },
-      "id": 226,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Small bedroom",
-          "value": "Small bedroom"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "rgba(31, 120, 193, 0)",
-        "rgba(237, 129, 40, 0.21)",
-        "#d44a3a"
-      ],
-      "datasource": null,
-      "decimals": 0,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "percentunit",
-      "gauge": {
-        "maxValue": 1,
-        "minValue": 0,
-        "show": true,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 21.599999999999998,
-        "y": 3
-      },
-      "id": 227,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Stairs",
-          "value": "Stairs"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(0, 0, 0, .1)",
-        "full": false,
-        "lineColor": "rgb(52, 52, 52)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": ".1,.8",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1118,11 +371,12 @@
           },
           "mappings": [
             {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
+              "options": {
+                "result": {
+                  "text": "Off"
+                }
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -1150,10 +404,9 @@
         "h": 3,
         "w": 2.4,
         "x": 0,
-        "y": 6
+        "y": 20
       },
       "id": 70,
-      "interval": null,
       "links": [],
       "maxDataPoints": 100,
       "maxPerRow": 12,
@@ -1172,16 +425,9 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "8.5.14",
       "repeat": "Room",
       "repeatDirection": "h",
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Back bedroom",
-          "value": "Back bedroom"
-        }
-      },
       "targets": [
         {
           "exemplar": true,
@@ -1199,907 +445,74 @@
       "type": "stat"
     },
     {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 2,
           "mappings": [
             {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#1f78c1",
+                "color": "#d44a3a",
                 "value": null
               },
               {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
+                "color": "rgba(98, 158, 81, 0)",
+                "value": 2.7
               },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 2.4,
-        "y": 6
-      },
-      "id": 228,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Breakfast area",
-          "value": "Breakfast area"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
               {
                 "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
+                "value": 10
               }
             ]
           },
-          "unit": "celsius"
+          "unit": "volt"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 3,
-        "w": 2.4,
-        "x": 4.8,
-        "y": 6
-      },
-      "id": 229,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Cat tree",
-          "value": "Cat tree"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 7.199999999999999,
-        "y": 6
-      },
-      "id": 230,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Front door",
-          "value": "Front door"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 9.6,
-        "y": 6
-      },
-      "id": 231,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Lounge",
-          "value": "Lounge"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 12,
-        "y": 6
-      },
-      "id": 232,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Master bedroom",
-          "value": "Master bedroom"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 14.4,
-        "y": 6
-      },
-      "id": 233,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Play area",
-          "value": "Play area"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 16.8,
-        "y": 6
-      },
-      "id": 234,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Sewing area",
-          "value": "Sewing area"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 19.2,
-        "y": 6
-      },
-      "id": 235,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Small bedroom",
-          "value": "Small bedroom"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "datasource": null,
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [
-            {
-              "from": "null",
-              "id": 0,
-              "text": "Off",
-              "to": "null",
-              "type": 2
-            }
-          ],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#1f78c1",
-                "value": null
-              },
-              {
-                "color": "rgba(234, 184, 57, 0.12)",
-                "value": 18
-              },
-              {
-                "color": "#d44a3a",
-                "value": 23
-              }
-            ]
-          },
-          "unit": "celsius"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 21.599999999999998,
-        "y": 6
-      },
-      "id": 236,
-      "interval": null,
-      "links": [],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "text": {},
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.5.4",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 70,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Stairs",
-          "value": "Stairs"
-        }
-      },
-      "targets": [
-        {
-          "exemplar": true,
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "title": "$Room",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
+        "w": 6,
         "x": 0,
-        "y": 9
+        "y": 23
       },
       "id": 90,
-      "interval": null,
       "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
       "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.5.14",
       "repeat": "Room",
       "repeatDirection": "h",
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Back bedroom",
-          "value": "Back bedroom"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
       "targets": [
         {
           "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
@@ -2109,900 +522,20 @@
           "refId": "A"
         }
       ],
-      "thresholds": "2.7,10",
       "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 2.4,
-        "y": 9
-      },
-      "id": 237,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Breakfast area",
-          "value": "Breakfast area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 4.8,
-        "y": 9
-      },
-      "id": 238,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Cat tree",
-          "value": "Cat tree"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 7.199999999999999,
-        "y": 9
-      },
-      "id": 239,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Front door",
-          "value": "Front door"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 9.6,
-        "y": 9
-      },
-      "id": 240,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Lounge",
-          "value": "Lounge"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 12,
-        "y": 9
-      },
-      "id": 241,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Master bedroom",
-          "value": "Master bedroom"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 14.4,
-        "y": 9
-      },
-      "id": 242,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Play area",
-          "value": "Play area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 16.8,
-        "y": 9
-      },
-      "id": 243,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Sewing area",
-          "value": "Sewing area"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 19.2,
-        "y": 9
-      },
-      "id": 244,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Small bedroom",
-          "value": "Small bedroom"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
-    },
-    {
-      "cacheTimeout": null,
-      "colorBackground": true,
-      "colorValue": false,
-      "colors": [
-        "#d44a3a",
-        "rgba(98, 158, 81, 0)",
-        "#1f78c1"
-      ],
-      "datasource": null,
-      "decimals": 2,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "format": "volt",
-      "gauge": {
-        "maxValue": 3,
-        "minValue": 2,
-        "show": false,
-        "thresholdLabels": false,
-        "thresholdMarkers": false
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 2.4,
-        "x": 21.599999999999998,
-        "y": 9
-      },
-      "id": 245,
-      "interval": null,
-      "links": [],
-      "mappingType": 1,
-      "mappingTypes": [
-        {
-          "name": "value to text",
-          "value": 1
-        },
-        {
-          "name": "range to text",
-          "value": 2
-        }
-      ],
-      "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "connected",
-      "nullText": null,
-      "postfix": "",
-      "postfixFontSize": "50%",
-      "prefix": "",
-      "prefixFontSize": "50%",
-      "rangeMaps": [
-        {
-          "from": "null",
-          "text": "N/A",
-          "to": "null"
-        }
-      ],
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 90,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Stairs",
-          "value": "Stairs"
-        }
-      },
-      "sparkline": {
-        "fillColor": "rgba(31, 118, 189, 0.18)",
-        "full": false,
-        "lineColor": "rgb(31, 120, 193)",
-        "show": false
-      },
-      "tableColumn": "",
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_battery_volts{name=\"$Room\"})",
-          "format": "time_series",
-          "instant": true,
-          "intervalFactor": 1,
-          "refId": "A"
-        }
-      ],
-      "thresholds": "2.7,10",
-      "title": "$Room",
-      "type": "singlestat",
-      "valueFontSize": "80%",
-      "valueMaps": [
-        {
-          "op": "=",
-          "text": "N/A",
-          "value": "null"
-        }
-      ],
-      "valueName": "current"
+      "type": "stat"
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 12
+        "y": 32
       },
       "id": 56,
       "panels": [],
@@ -3019,10 +552,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
       },
       "fill": 0,
       "fillGradient": 0,
@@ -3030,7 +562,7 @@
         "h": 6,
         "w": 6,
         "x": 0,
-        "y": 13
+        "y": 33
       },
       "hiddenSeries": false,
       "id": 2,
@@ -3053,19 +585,12 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "8.5.14",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
       "repeat": "Room",
       "repeatDirection": "h",
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Back bedroom",
-          "value": "Back bedroom"
-        }
-      },
       "seriesOverrides": [
         {
           "alias": "Output",
@@ -3118,9 +643,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "$Room",
       "tooltip": {
         "shared": true,
@@ -3129,19 +652,14 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "celsius",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
@@ -3155,1377 +673,20 @@
         }
       ],
       "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 13
-      },
-      "hiddenSeries": false,
-      "id": 246,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Breakfast area",
-          "value": "Breakfast area"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 13
-      },
-      "hiddenSeries": false,
-      "id": 247,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Cat tree",
-          "value": "Cat tree"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 13
-      },
-      "hiddenSeries": false,
-      "id": 248,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Front door",
-          "value": "Front door"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 249,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Lounge",
-          "value": "Lounge"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 250,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Master bedroom",
-          "value": "Master bedroom"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 251,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Play area",
-          "value": "Play area"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 18,
-        "y": 19
-      },
-      "hiddenSeries": false,
-      "id": 252,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Sewing area",
-          "value": "Sewing area"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 25
-      },
-      "hiddenSeries": false,
-      "id": 253,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Small bedroom",
-          "value": "Small bedroom"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {
-        "Actual Temperature": "#6ed0e0",
-        "Output": "#f2c96d",
-        "Target Output": "#967302",
-        "Target Temperature": "#967302"
-      },
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
-      "fill": 0,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 25
-      },
-      "hiddenSeries": false,
-      "id": 254,
-      "legend": {
-        "alignAsTable": false,
-        "avg": false,
-        "current": true,
-        "max": false,
-        "min": false,
-        "rightSide": false,
-        "show": true,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.5.4",
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "repeatDirection": "h",
-      "repeatIteration": 1647547216846,
-      "repeatPanelId": 2,
-      "scopedVars": {
-        "Room": {
-          "selected": false,
-          "text": "Stairs",
-          "value": "Stairs"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Output",
-          "fill": 1,
-          "linewidth": 0,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Output",
-          "dashes": true,
-          "yaxis": 2
-        },
-        {
-          "alias": "Target Temperature",
-          "dashes": true
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "max without (instance) (lwl_current_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "Actual Temperature",
-          "refId": "A"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_celsius{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Temperature",
-          "refId": "B"
-        },
-        {
-          "expr": "max without (instance) (lwl_output_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Output",
-          "refId": "C"
-        },
-        {
-          "expr": "max without (instance) (lwl_target_ratio{name=\"$Room\"})",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Target Output",
-          "refId": "D"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$Room",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "celsius",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": 0,
-          "format": "percentunit",
-          "label": "",
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
+        "align": true
       }
     },
     {
       "collapsed": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 31
+        "y": 51
       },
       "id": 116,
       "panels": [],
@@ -4595,20 +756,19 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "decimals": 0,
       "description": "When one or more valves are calling for heat, there must be at least one switch calling for heat (i.e. the boiler switch)",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
         "w": 20,
         "x": 0,
-        "y": 32
+        "y": 52
       },
       "hiddenSeries": false,
       "id": 142,
@@ -4631,7 +791,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "8.5.14",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -4666,9 +826,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Call for heat: Switching on",
       "tooltip": {
         "shared": true,
@@ -4677,33 +835,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -4770,20 +919,19 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
+      },
       "decimals": 0,
       "description": "When no valves are calling for heat, there must be any switch calling for heat (i.e. the boiler switch)",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
         "h": 5,
         "w": 20,
         "x": 0,
-        "y": 37
+        "y": 57
       },
       "hiddenSeries": false,
       "id": 167,
@@ -4806,7 +954,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "8.5.14",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -4849,9 +997,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Call for heat: Switching off",
       "tooltip": {
         "shared": true,
@@ -4860,33 +1006,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -4930,10 +1067,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
       },
       "fill": 0,
       "fillGradient": 0,
@@ -4941,7 +1077,7 @@
         "h": 6,
         "w": 20,
         "x": 0,
-        "y": 42
+        "y": 62
       },
       "hiddenSeries": false,
       "id": 193,
@@ -4964,7 +1100,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "8.5.14",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -4992,9 +1128,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Low battery",
       "tooltip": {
         "shared": true,
@@ -5003,18 +1137,14 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "$$hashKey": "object:653",
-          "decimals": null,
           "format": "volt",
-          "label": null,
           "logBase": 1,
           "max": "3",
           "min": "2.2",
@@ -5023,16 +1153,12 @@
         {
           "$$hashKey": "object:654",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": false
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -5076,19 +1202,18 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "description": "Difference between query time (i.e. \"now\") and time recorded in most recent (i.e. \"last\") status message",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
+      "datasource": {
+        "type": "prometheus",
+        "uid": "PBFA97CFB590B2093"
       },
+      "description": "Difference between query time (i.e. \"now\") and time recorded in most recent (i.e. \"last\") status message",
       "fill": 0,
       "fillGradient": 0,
       "gridPos": {
         "h": 6,
         "w": 20,
         "x": 0,
-        "y": 48
+        "y": 68
       },
       "hiddenSeries": false,
       "id": 218,
@@ -5111,7 +1236,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.4",
+      "pluginVersion": "8.5.14",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -5141,9 +1266,7 @@
           "visible": true
         }
       ],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Age of most recent status message",
       "tooltip": {
         "shared": false,
@@ -5152,9 +1275,7 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "series",
-        "name": null,
         "show": true,
         "values": [
           "current"
@@ -5163,41 +1284,33 @@
       "yaxes": [
         {
           "$$hashKey": "object:247",
-          "decimals": null,
           "format": "s",
           "label": "",
           "logBase": 1,
-          "max": null,
           "min": "0",
           "show": true
         },
         {
           "$$hashKey": "object:248",
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": false
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
   "refresh": "1m",
-  "schemaVersion": 27,
+  "schemaVersion": 36,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": [
       {
-        "allValue": null,
         "current": {
           "selected": true,
-          "tags": [],
           "text": [
             "All"
           ],
@@ -5205,10 +1318,11 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
         "definition": "query_result(max without (instance) (last_over_time( lwl_time{job=\"lwl\",product=\"valve\"}[4w] )))",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "",
@@ -5224,15 +1338,13 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
-        "allValue": null,
         "current": {
-          "selected": false,
+          "selected": true,
           "text": [
             "All"
           ],
@@ -5240,10 +1352,11 @@
             "$__all"
           ]
         },
-        "datasource": "Prometheus",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "PBFA97CFB590B2093"
+        },
         "definition": "query_result(max without (instance) (last_over_time( lwl_time{job=\"lwl\",product=\"electr\"}[4w] )))",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "",
@@ -5259,7 +1372,6 @@
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -5267,7 +1379,7 @@
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -5298,5 +1410,6 @@
   "timezone": "",
   "title": "LightwaveRF Heating",
   "uid": "LJ_reSigk",
-  "version": 7
+  "version": 1,
+  "weekStart": ""
 }
